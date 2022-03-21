@@ -1,0 +1,21 @@
+.wrapper{
+    max-height: 560px;
+    overflow-y: scroll;
+}
+.element{
+    display: flex;
+    align-items: center;
+}
+.bottom{
+    display:flex;
+    justify-content: end;
+}
+.bottom .price{
+    display: flex;
+    align-items: center;
+    font-family: 'Iceland';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 36px;
+}

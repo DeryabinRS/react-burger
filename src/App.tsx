@@ -8,12 +8,12 @@ import './App.css';
 
 function App() {
   	return (
-	  	<div className="App">
-			  <div >
-				<AppHeader/>
+	  	<div className="App">  
+			<AppHeader/>
+			<div className="container">
 				<BurgerIngredients burgerList={burgerList}/>
 				<BurgerConstructor/>
-			  </div>
+			</div>
 		</div>
 	);
 }

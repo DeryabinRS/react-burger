@@ -1,8 +1,27 @@
 a, a svg{color: #8585AD; fill: #8585AD; text-decoration: none; }
 a:hover, a:hover svg{color: white; fill: white;}
 
-.App {
-  text-align: center;
+.scroll{
+/*For Firefox*/
+  scrollbar-width: thin;  
+  scrollbar-color: blue orange;
+}
+.scroll::-webkit-scrollbar {
+  width: 8px;               /* ширина scrollbar */
+}
+.scroll::-webkit-scrollbar-track {
+  background: #2F2F37;        /* цвет дорожки */
+}
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #8585AD;    /* цвет плашки */ /* padding вокруг плашки */
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  gap:40px;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .App-logo {
@@ -11,7 +30,7 @@ a:hover, a:hover svg{color: white; fill: white;}
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  .App-logo svg{
     animation: App-logo-spin infinite 20s linear;
   }
 }
@@ -28,3 +47,4 @@ a:hover, a:hover svg{color: white; fill: white;}
     transform: rotate(360deg);
   }
 }
+

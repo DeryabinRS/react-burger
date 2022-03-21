@@ -7,11 +7,25 @@
     font-size: calc(10px + 2vmin);
     color: white;
     margin: 40px;
-    padding: 16px;
 }
 
+.wrapper{display: flex;justify-content: space-between;flex-wrap: wrap;}
+
+@media (min-width:1380px) {
+    .wrapper{
+        width: 1280px;
+    }
+}
+
+.links{
+    display: flex;
+}
 .link{
     display: flex;
     font-size: 16px;
-    padding: 16px;
+    font-family: 'Jet Brains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
 }
