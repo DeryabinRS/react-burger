@@ -29,7 +29,7 @@ const BurgerIngredients:FC<BurgerListType> = ({burgerList}): JSX.Element  => {
     return (
       <div className={styles.wrapper}>
         <div><h2 className={`${styles.h2} mt-10 mb-5`}>Собери бургер</h2></div>
-        <div style={{ display: 'flex' }}>
+        <div className={styles.flex}>
             <Tab value="one" active={current === 'one'} onClick={setCurrent}>
             Булки
             </Tab>
@@ -43,15 +43,15 @@ const BurgerIngredients:FC<BurgerListType> = ({burgerList}): JSX.Element  => {
         <div className={`${styles.wrapper_indredients} mt-10 scroll`}>
             <h2 className={styles.title}>Булки</h2>
             <div className={`${styles.ingredient_list} mb-10`}>
-                {burgerList.filter(item => item.type === 'bun').map(item => <CardIngredient {...item}/>)}
+                {burgerList.filter(item => item.type === 'bun').map(item => <CardIngredient key={item._id} {...item}/>)}
             </div>
             <h2 className={styles.title}>Соусы</h2>
             <div className={`${styles.ingredient_list} mb-10`}>   
-                {burgerList.filter(item => item.type === 'sauce').map(item => <CardIngredient {...item}/>)}
+                {burgerList.filter(item => item.type === 'sauce').map(item => <CardIngredient key={item._id} {...item}/>)}
             </div>
             <h2 className={styles.title}>Начинки</h2>
             <div className={`${styles.ingredient_list} mb-10`}>
-                {burgerList.filter(item => item.type === 'main').map(item => <CardIngredient {...item}/>)}
+                {burgerList.filter(item => item.type === 'main').map(item => <CardIngredient key={item._id} {...item}/>)}
             </div>
         </div>
       </div>  

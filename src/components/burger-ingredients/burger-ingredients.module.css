@@ -9,6 +9,10 @@
     line-height: 40px;
 }
 
+.flex{
+    display: 'flex'
+}
+
 .wrapper_indredients{
     max-height: 700px;
     overflow-y: scroll;
