@@ -9,9 +9,7 @@
     line-height: 40px;
 }
 
-.flex{
-    display: 'flex'
-}
+.flex{display: flex;}
 
 .wrapper_indredients{
     max-height: 700px;
