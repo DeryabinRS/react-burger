@@ -1,3 +1,7 @@
+@import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/fonts/fonts.css';
+@import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+@import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +14,22 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a, a svg{color: #8585AD; fill: #8585AD; text-decoration: none; }
+a:hover, a:hover svg{color: white; fill: white;}
+
+.scroll{
+/*For Firefox*/
+  scrollbar-width: thin;  
+  scrollbar-color: blue orange;
+}
+.scroll::-webkit-scrollbar {
+  width: 8px;               /* ширина scrollbar */
+}
+.scroll::-webkit-scrollbar-track {
+  background: #2F2F37;        /* цвет дорожки */
+}
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #8585AD;    /* цвет плашки */ /* padding вокруг плашки */
 }
