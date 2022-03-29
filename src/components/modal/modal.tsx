@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import styles from './modal.module.css'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -19,9 +20,8 @@ const Modal: FC<ModalType> = ({ title, modalOverlayColor, children, isActive, ha
             document.removeEventListener("keydown", escFunction, false);
         };
     }, []);
-
-    return (
-        isActive ?
+    if(!isActive) return null;
+    return createPortal(
             <ModalOverlay onClose={handleCloseModal}>
                 <div className={styles.modal} onClick={e => e.stopPropagation()}>
                     <div className={styles.modal_header}>
@@ -33,7 +33,8 @@ const Modal: FC<ModalType> = ({ title, modalOverlayColor, children, isActive, ha
                     </div>
                 </div>
             </ModalOverlay>
-            : null
+            ,document.body
+            
     )
 }
 
