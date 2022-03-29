@@ -6,7 +6,6 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
-    margin: 40px;
 }
 
 .wrapper{display: flex;justify-content: space-between;flex-wrap: wrap;}
