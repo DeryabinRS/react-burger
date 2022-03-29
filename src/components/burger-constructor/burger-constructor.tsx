@@ -1,10 +1,26 @@
-import React from 'react'
+import { FC, useState } from 'react'
 import styles from './burger-constructor.module.css'
 import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import img from '@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png'
-import { burgerList } from '../../utils/data' 
+import { BurgerListType } from '../../types/Burger'
+import Modal from '../modal/modal'
+import OrderDetails from '../order-details/order-details'
 
-const BurgerConstructor = () => {
+const OrderModal:FC<any> = ({isActive, handleCloseModal, children}) => {
+  return (
+      <Modal isActive={isActive} handleCloseModal={handleCloseModal}>
+          {children}
+      </Modal>
+  )
+}
+
+const BurgerConstructor:FC<BurgerListType> = ({burgerList}) => {
+
+  const [isActive, setIsActive] = useState(false)
+  const handleToggleModal = () => {
+      setIsActive(!isActive)
+  }
+
   return (
 
     <div className={`${styles.burger_constructor} mt-25`}>
@@ -50,9 +66,12 @@ const BurgerConstructor = () => {
           </div>
         </div>
         <div>
-          <Button>Оформить заказ</Button>
+          <Button onClick={handleToggleModal}>Оформить заказ</Button>
         </div>
       </div>
+      <OrderModal isActive={isActive} handleCloseModal={handleToggleModal}>
+        <OrderDetails id={'034536'}/>    
+      </OrderModal>
     </div>
 
   )

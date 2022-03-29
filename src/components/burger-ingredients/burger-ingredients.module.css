@@ -48,6 +48,7 @@
     order: 0;
     flex-grow: 0;
     margin: 8px 0px;
+    cursor: pointer;
 }
 .image img{ width: 100%;}
 

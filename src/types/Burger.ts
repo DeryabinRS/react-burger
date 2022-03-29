@@ -13,3 +13,7 @@ export interface BurgerType
     image_large: string;
     __v: number;
 }
+
+export interface BurgerListType{
+    burgerList: BurgerType[]
+}

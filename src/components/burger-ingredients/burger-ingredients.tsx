@@ -1,17 +1,38 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import styles from './burger-ingredients.module.css'
-import { BurgerType } from '../../types/Burger'
+import { BurgerType, BurgerListType } from '../../types/Burger'
 import { Counter, CurrencyIcon, Tab } from '@ya.praktikum/react-developer-burger-ui-components'
+import Modal from '../modal/modal'
+import IngredientDetails from '../ingredient-details/ingredient-details'
 
-interface BurgerListType{
-    burgerList: BurgerType[]
+const IngredientsModal:FC<any> = ({isActive, handleCloseModal, children}) => {
+    return (
+        <Modal title="Детали ингредиента" isActive={isActive} handleCloseModal={handleCloseModal}>
+            {children}
+        </Modal>
+    )
 }
 
 const CardIngredient:FC<BurgerType> = (props): JSX.Element => {
+    const [isActive, setIsActive] = useState(false)
+    const handleToggleModal = () => {
+        setIsActive(!isActive)
+    }
     return(
+        <>
+        <IngredientsModal isActive={isActive} handleCloseModal={handleToggleModal}>
+            <IngredientDetails 
+                image={props.image_large} 
+                name={props.name}
+                proteins={props.proteins}
+                fat={props.fat}
+                carbohydrates={props.carbohydrates}
+                calories={props.calories}
+            />
+        </IngredientsModal>
         <div className={`${styles.card} pt-6 mr-4 ml-4`}>
             <div className={styles.counter}><Counter count={1} size="default" /></div>
-            <div className={styles.image}>
+            <div onClick={handleToggleModal} className={styles.image}>
                 <img src={props.image_large}/>
             </div>
             <div className={styles.price}>
@@ -21,6 +42,7 @@ const CardIngredient:FC<BurgerType> = (props): JSX.Element => {
                 {props.name}
             </div>
         </div>
+            </>
     )
 }
 
