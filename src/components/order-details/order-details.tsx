@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import styles from './order-details.module.css'
-import ImageDone from '../../img/done.svg'
+import ImageDone from '../../images/done.svg'
 
 interface OrderDetailsType{
     id: string; 
