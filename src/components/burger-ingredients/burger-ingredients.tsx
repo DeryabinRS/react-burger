@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback } from 'react'
+import React, { FC, useState} from 'react'
 import styles from './burger-ingredients.module.css'
 import { BurgerType, BurgerListType } from '../../types/Burger'
 import { Counter, CurrencyIcon, Tab } from '@ya.praktikum/react-developer-burger-ui-components'
