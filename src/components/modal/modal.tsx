@@ -6,21 +6,29 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 interface ModalType {
     title?: string;
-    modalOverlayColor?: string;
     isActive: boolean;
     handleCloseModal: () => void;
-    escFunction: any;
 }
 
-const Modal: FC<ModalType> = ({ title, modalOverlayColor, children, isActive, handleCloseModal, escFunction }) => {
+const modalBlock:any = document.getElementById('modal')
+
+const Modal: FC<ModalType> = ({ title, children, isActive, handleCloseModal }) => {
 
     useEffect(() => {
-        document.addEventListener("keydown", escFunction, false);
+        document.addEventListener("keydown", (e) => escFunction(e), false);
         return () => {
-            document.removeEventListener("keydown", escFunction, false);
+            document.removeEventListener("keydown", (e) => escFunction(e), false);
         };
     }, []);
+
+    const escFunction = (event: any) => {
+		if (event.key === "Escape") {
+			modalBlock.innerHTML = '';
+		}
+	};
+
     if(!isActive) return null;
+
     return createPortal(
             <ModalOverlay onClose={handleCloseModal}>
                 <div className={styles.modal} onClick={e => e.stopPropagation()}>
@@ -33,7 +41,7 @@ const Modal: FC<ModalType> = ({ title, modalOverlayColor, children, isActive, ha
                     </div>
                 </div>
             </ModalOverlay>
-            ,document.body
+            ,modalBlock
             
     )
 }

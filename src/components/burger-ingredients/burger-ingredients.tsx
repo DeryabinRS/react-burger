@@ -3,22 +3,17 @@ import styles from './burger-ingredients.module.css'
 import { BurgerType, BurgerListType } from '../../types/Burger'
 import { Counter, CurrencyIcon, Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientDetails from '../ingredient-details/ingredient-details'
-import ModalCustom from '../modal-custom/modal-custom'
+import Modal from '../modal/modal'
 
 const CardIngredient: FC<BurgerType> = (props): JSX.Element => {
     const [isActive, setIsActive] = useState(false)
     const handleToggleModal = () => {
         setIsActive(!isActive)
     }
-    const escFunction = useCallback((event: any) => {
-        if (event.key === "Escape") {
-            setIsActive(false)
-        }
-    }, []);
 
     return (
         <>
-            <ModalCustom title="Детали ингредиента" isActive={isActive} handleCloseModal={handleToggleModal} escFunction={escFunction}>
+            <Modal title="Детали ингредиента" isActive={isActive} handleCloseModal={handleToggleModal} >
                 <IngredientDetails
                     image={props.image_large}
                     name={props.name}
@@ -27,7 +22,7 @@ const CardIngredient: FC<BurgerType> = (props): JSX.Element => {
                     carbohydrates={props.carbohydrates}
                     calories={props.calories}
                 />
-            </ModalCustom>
+            </Modal>
             <div className={`${styles.card} pt-6 mr-4 ml-4`}>
                 <div className={styles.counter}><Counter count={1} size="default" /></div>
                 <div onClick={handleToggleModal} className={styles.image}>

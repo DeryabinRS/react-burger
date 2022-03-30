@@ -1,10 +1,10 @@
-import { FC, useState, useCallback } from 'react'
+import { FC, useState } from 'react'
 import styles from './burger-constructor.module.css'
 import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import img from '@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png'
 import { BurgerListType } from '../../types/Burger'
 import OrderDetails from '../order-details/order-details'
-import ModalCustom from '../modal-custom/modal-custom'
+import Modal from '../modal/modal'
 
 const BurgerConstructor: FC<BurgerListType> = ({ burgerList }) => {
 
@@ -12,12 +12,6 @@ const BurgerConstructor: FC<BurgerListType> = ({ burgerList }) => {
 	const handleToggleModal = () => {
 		setIsActive(!isActive)
 	}
-
-	const escFunction = useCallback((event: any) => {
-		if (event.key === "Escape") {
-			setIsActive(false)
-		}
-	}, []);
 
 	return (
 
@@ -65,9 +59,9 @@ const BurgerConstructor: FC<BurgerListType> = ({ burgerList }) => {
 				</div>
 				<Button onClick={handleToggleModal}>Оформить заказ</Button>
 			</div>
-			<ModalCustom isActive={isActive} handleCloseModal={handleToggleModal} escFunction={escFunction}>
+			<Modal isActive={isActive} handleCloseModal={handleToggleModal}>
 				<OrderDetails id={'034536'} />
-			</ModalCustom>
+			</Modal>
 		</div>
 
 	)
