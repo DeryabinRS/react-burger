@@ -7,8 +7,8 @@ import Modal from '../modal/modal'
 
 const CardIngredient: FC<BurgerType> = (props): JSX.Element => {
     const [isActive, setIsActive] = useState(false)
-    const handleToggleModal = () => {
-        setIsActive(!isActive)
+    const handleToggleModal = (active:boolean) => {
+        setIsActive(active)
     }
 
     return (
@@ -25,7 +25,7 @@ const CardIngredient: FC<BurgerType> = (props): JSX.Element => {
             </Modal>
             <div className={`${styles.card} pt-6 mr-4 ml-4`}>
                 <div className={styles.counter}><Counter count={1} size="default" /></div>
-                <div onClick={handleToggleModal} className={styles.image}>
+                <div onClick={() => handleToggleModal(true)} className={styles.image}>
                     <img src={props.image_large} />
                 </div>
                 <div className={styles.price}>

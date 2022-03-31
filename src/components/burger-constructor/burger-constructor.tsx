@@ -4,13 +4,14 @@ import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktiku
 import img from '@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png'
 import { BurgerListType } from '../../types/Burger'
 import OrderDetails from '../order-details/order-details'
+
 import Modal from '../modal/modal'
 
 const BurgerConstructor: FC<BurgerListType> = ({ burgerList }) => {
 
 	const [isActive, setIsActive] = useState(false)
-	const handleToggleModal = () => {
-		setIsActive(!isActive)
+	const handleToggleModal = (active:boolean) => {
+		setIsActive(active)
 	}
 
 	return (
@@ -57,7 +58,7 @@ const BurgerConstructor: FC<BurgerListType> = ({ burgerList }) => {
 						<CurrencyIcon type="primary" />
 					</div>
 				</div>
-				<Button onClick={handleToggleModal}>Оформить заказ</Button>
+				<Button onClick={() => handleToggleModal(true)}>Оформить заказ</Button>
 			</div>
 			<Modal isActive={isActive} handleCloseModal={handleToggleModal}>
 				<OrderDetails id={'034536'} />

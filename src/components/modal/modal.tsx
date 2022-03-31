@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import styles from './modal.module.css'
@@ -7,7 +7,7 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 interface ModalType {
     title?: string;
     isActive: boolean;
-    handleCloseModal: () => void;
+    handleCloseModal: (active:boolean) => void;
 }
 
 const modalBlock:any = document.getElementById('modal')
@@ -15,26 +15,26 @@ const modalBlock:any = document.getElementById('modal')
 const Modal: FC<ModalType> = ({ title, children, isActive, handleCloseModal }) => {
 
     useEffect(() => {
-        document.addEventListener("keydown", (e) => escFunction(e), false);
+        document.addEventListener("keydown", escFunction, false);
         return () => {
-            document.removeEventListener("keydown", (e) => escFunction(e), false);
+            document.removeEventListener("keydown", escFunction, false);
         };
     }, []);
 
-    const escFunction = (event: any) => {
+    const escFunction = useCallback((event) => {
 		if (event.key === "Escape") {
-			modalBlock.innerHTML = '';
+			handleCloseModal(false)
 		}
-	};
+	},[isActive]);
 
     if(!isActive) return null;
 
     return createPortal(
-            <ModalOverlay onClose={handleCloseModal}>
+            <ModalOverlay onClose={() => handleCloseModal(false)}>
                 <div className={styles.modal} onClick={e => e.stopPropagation()}>
                     <div className={styles.modal_header}>
                         <div className={styles.title}>{title}</div>
-                        <div className={`${styles.btn_close} pt-2`} onClick={handleCloseModal}><CloseIcon type="primary" /></div>
+                        <div className={`${styles.btn_close} pt-2`} onClick={() => handleCloseModal(false)}><CloseIcon type="primary" /></div>
                     </div>
                     <div>
                         {children}

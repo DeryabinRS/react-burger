@@ -14,9 +14,12 @@ function App() {
 		const fetchIngredients = async () => {
 			try {
 				let response: any = await fetch(apiIngredients)
-				response = await response.json()
+					.then(res => res.json())
+					.catch((e) => {
+						throw new Error('Ошибка сервера: данные не доступны');
+					})
 				if (!response.success) {
-					throw new Error('Ошибка сервера');
+					throw new Error('Ошибка сервера: данные не доступны');
 				}
 				setIngredients(response.data)
 			} catch (error) {
