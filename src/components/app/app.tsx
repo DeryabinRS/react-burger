@@ -15,15 +15,13 @@ function App() {
 			try {
 				let response: any = await fetch(apiIngredients)
 					.then(res => res.json())
-					.catch((e) => {
-						throw new Error('Ошибка сервера: данные не доступны');
-					})
+
 				if (!response.success) {
 					throw new Error('Ошибка сервера: данные не доступны');
 				}
 				setIngredients(response.data)
-			} catch (error) {
-				console.log(error);
+			} catch (error:any) {
+				console.log('Возникла проблема с вашим fetch запросом: ', error.message);
 			}
 		}
 		fetchIngredients()

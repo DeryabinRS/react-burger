@@ -60,7 +60,7 @@ const BurgerConstructor: FC<BurgerListType> = ({ burgerList }) => {
 				</div>
 				<Button onClick={() => handleToggleModal(true)}>Оформить заказ</Button>
 			</div>
-			<Modal isActive={isActive} handleCloseModal={handleToggleModal}>
+			<Modal isActive={isActive} handleToggleModal={handleToggleModal}>
 				<OrderDetails id={'034536'} />
 			</Modal>
 		</div>

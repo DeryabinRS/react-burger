@@ -7,12 +7,12 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 interface ModalType {
     title?: string;
     isActive: boolean;
-    handleCloseModal: (active:boolean) => void;
+    handleToggleModal: (active: boolean) => void;
 }
 
-const modalBlock:any = document.getElementById('modal')
+const modalBlock: any = document.getElementById('modal')
 
-const Modal: FC<ModalType> = ({ title, children, isActive, handleCloseModal }) => {
+const Modal: FC<ModalType> = ({ title, children, isActive, handleToggleModal }) => {
 
     useEffect(() => {
         document.addEventListener("keydown", escFunction, false);
@@ -22,27 +22,27 @@ const Modal: FC<ModalType> = ({ title, children, isActive, handleCloseModal }) =
     }, []);
 
     const escFunction = useCallback((event) => {
-		if (event.key === "Escape") {
-			handleCloseModal(false)
-		}
-	},[isActive]);
+        if (event.key === "Escape") {
+            handleToggleModal(false)
+        }
+    }, []);
 
-    if(!isActive) return null;
+    if (!isActive) return null;
 
     return createPortal(
-            <ModalOverlay onClose={() => handleCloseModal(false)}>
-                <div className={styles.modal} onClick={e => e.stopPropagation()}>
-                    <div className={styles.modal_header}>
-                        <div className={styles.title}>{title}</div>
-                        <div className={`${styles.btn_close} pt-2`} onClick={() => handleCloseModal(false)}><CloseIcon type="primary" /></div>
-                    </div>
-                    <div>
-                        {children}
-                    </div>
+        <ModalOverlay onClose={() => handleToggleModal(false)}>
+            <div className={styles.modal} onClick={e => e.stopPropagation()}>
+                <div className={styles.modal_header}>
+                    <div className={styles.title}>{title}</div>
+                    <div className={`${styles.btn_close} pt-2`} onClick={() => handleToggleModal(false)}><CloseIcon type="primary" /></div>
                 </div>
-            </ModalOverlay>
-            ,modalBlock
-            
+                <div>
+                    {children}
+                </div>
+            </div>
+        </ModalOverlay>
+        , modalBlock
+
     )
 }
 
