@@ -14,7 +14,7 @@ const IngredientDetails: FC<IngredientDetailsType> = ({ name, proteins, fat, car
     return (
         <div className={styles.card}>
             <div className={styles.img}>
-                <img src={image} />
+                <img src={image} alt="Done"/>
             </div>
             <div className={`${styles.name} pt-4`}>
                 {name}
