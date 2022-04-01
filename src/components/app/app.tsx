@@ -6,7 +6,7 @@ import styles from './app.module.css';
 
 function App() {
 
-	const apiIngredients = 'https://norma.nomoreparties.space/api/ingredients1'
+	const apiIngredients = 'https://norma.nomoreparties.space/api/ingredients'
 
 	const [ingredients, setIngredients] = useState([])
 
