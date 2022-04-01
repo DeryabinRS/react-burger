@@ -6,22 +6,21 @@ import styles from './app.module.css';
 
 function App() {
 
-	const apiIngredients = 'https://norma.nomoreparties.space/api/ingredients'
+	const apiIngredients = 'https://norma.nomoreparties.space/api/ingredients1'
 
 	const [ingredients, setIngredients] = useState([])
 
 	useEffect(() => {
 		const fetchIngredients = async () => {
 			try {
-				let response: any = await fetch(apiIngredients)
-					.then(res => res.json())
-
-				if (!response.success) {
+				const response: any = await fetch(apiIngredients)
+				if (!response.ok) {
 					throw new Error('Ошибка сервера: данные не доступны');
 				}
-				setIngredients(response.data)
+				const res = await response.json();
+				setIngredients(res.data)
 			} catch (error:any) {
-				console.log('Возникла проблема с вашим fetch запросом: ', error.message);
+				console.log(error.message);
 			}
 		}
 		fetchIngredients()
