@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { IngredientsDataContex } from "../../services/ingredientsService";
 import AppHeader from "../app-header/app-header";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
@@ -27,6 +28,7 @@ function App() {
 	}, [])
 
 	return (
+		<IngredientsDataContex.Provider value={{ingredients, setIngredients}}>
 		<div className="App">
 			<AppHeader />
 			<div className={styles.container}>
@@ -34,6 +36,7 @@ function App() {
 				<BurgerConstructor burgerList={ingredients} />
 			</div>
 		</div>
+		</IngredientsDataContex.Provider>
 	);
 }
 
