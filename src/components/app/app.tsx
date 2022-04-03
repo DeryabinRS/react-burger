@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { IngredientsDataContex } from "../../services/ingredientsService";
+import { BurgerType } from "../../types/Burger";
 import AppHeader from "../app-header/app-header";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
@@ -9,7 +10,7 @@ function App() {
 
 	const apiIngredients = 'https://norma.nomoreparties.space/api/ingredients'
 
-	const [ingredients, setIngredients] = useState([])
+	const [ingredients, setIngredients] = useState<BurgerType[]>([])
 
 	useEffect(() => {
 		const fetchIngredients = async () => {
@@ -28,12 +29,12 @@ function App() {
 	}, [])
 
 	return (
-		<IngredientsDataContex.Provider value={{ingredients, setIngredients}}>
+		<IngredientsDataContex.Provider value={ingredients}>
 		<div className="App">
 			<AppHeader />
 			<div className={styles.container}>
-				<BurgerIngredients burgerList={ingredients} />
-				<BurgerConstructor burgerList={ingredients} />
+				<BurgerIngredients />
+				<BurgerConstructor />
 			</div>
 		</div>
 		</IngredientsDataContex.Provider>

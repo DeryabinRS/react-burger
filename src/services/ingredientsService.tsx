@@ -1,3 +1,4 @@
 import { createContext } from "react";
+import { BurgerType } from "../types/Burger";
 
-export const IngredientsDataContex = createContext({})
+export const IngredientsDataContex = createContext<BurgerType[]>([])

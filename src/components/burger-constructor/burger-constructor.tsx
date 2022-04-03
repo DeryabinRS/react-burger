@@ -1,18 +1,20 @@
-import { FC, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 import styles from './burger-constructor.module.css'
 import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import img from '@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png'
-import { BurgerListType } from '../../types/Burger'
 import OrderDetails from '../order-details/order-details'
 
 import Modal from '../modal/modal'
+import { IngredientsDataContex } from '../../services/ingredientsService'
 
-const BurgerConstructor: FC<BurgerListType> = ({ burgerList }) => {
+const BurgerConstructor: FC = () => {
 
 	const [isActive, setIsActive] = useState(false)
 	const handleToggleModal = (active:boolean) => {
 		setIsActive(active)
 	}
+
+	const ingredients = useContext(IngredientsDataContex)
 
 	return (
 
@@ -28,7 +30,7 @@ const BurgerConstructor: FC<BurgerListType> = ({ burgerList }) => {
 			</div>
 			<div className={`${styles.wrapper} scroll pr-2`}>
 				{
-					burgerList.filter(item => item.type !== 'bun').map(item => (
+					ingredients.filter(item => item.type !== 'bun').map(item => (
 						<div key={item._id} className={`${styles.element} pb-4`}>
 							<div className='pr-2'>
 								<DragIcon type="primary" />
