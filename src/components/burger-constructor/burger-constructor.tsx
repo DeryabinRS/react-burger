@@ -5,7 +5,7 @@ import img from '@ya.praktikum/react-developer-burger-ui-components/dist/images/
 import OrderDetails from '../order-details/order-details'
 
 import Modal from '../modal/modal'
-import { IngredientsDataContex } from '../../services/ingredientsService'
+import { IngredientsDataContex, SelectedIngredientsContext } from '../../services/ingredientsService'
 
 const BurgerConstructor: FC = () => {
 
@@ -15,6 +15,7 @@ const BurgerConstructor: FC = () => {
 	}
 
 	const ingredients = useContext(IngredientsDataContex)
+	
 
 	return (
 
