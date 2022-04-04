@@ -5,7 +5,7 @@ import img from '@ya.praktikum/react-developer-burger-ui-components/dist/images/
 import OrderDetails from '../order-details/order-details'
 
 import Modal from '../modal/modal'
-import { IngredientsDataContex, SelectedIngredientsContext } from '../../services/ingredientsService'
+import { IngredientsDataContex } from '../../services/ingredientsService'
 
 const BurgerConstructor: FC = () => {
 
@@ -14,8 +14,9 @@ const BurgerConstructor: FC = () => {
 		setIsActive(active)
 	}
 
-	const ingredients = useContext(IngredientsDataContex)
+	const { state:{ingredients, selectedIngredients}, dispatchState } = useContext(IngredientsDataContex)
 	
+	//dispatchState({type:'ADD_SELECTED_INGREDIENT'})
 
 	return (
 
@@ -31,7 +32,7 @@ const BurgerConstructor: FC = () => {
 			</div>
 			<div className={`${styles.wrapper} scroll pr-2`}>
 				{
-					ingredients.filter(item => item.type !== 'bun').map(item => (
+					selectedIngredients.filter(item => item.type !== 'bun').map(item => (
 						<div key={item._id} className={`${styles.element} pb-4`}>
 							<div className='pr-2'>
 								<DragIcon type="primary" />

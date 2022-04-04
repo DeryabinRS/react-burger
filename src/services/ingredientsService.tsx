@@ -1,13 +1,20 @@
-import { createContext } from "react";
+import { createContext, Dispatch } from "react";
 import { BurgerType } from "../types/Burger";
 
 type InitialStateType = {
-    ingredients: [],
-	selectedIngredients: []
+  	ingredients: BurgerType[];
+  	selectedIngredients: BurgerType[];
+};
+
+const intialState = {
+	ingredients: [],
+  	selectedIngredients: [],
 }
 
 export const IngredientsDataContex = createContext<{
-  state: BurgerType[],  
+  	state: InitialStateType;
+	dispatchState: Dispatch<any>;
 }>({
-    
-})
+	state: intialState,
+	dispatchState: () => null,
+});

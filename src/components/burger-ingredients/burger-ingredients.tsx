@@ -7,8 +7,8 @@ import { IngredientsDataContex } from '../../services/ingredientsService'
 const BurgerIngredients: FC = (): JSX.Element => {
     const [current, setCurrent] = React.useState('one')
 
-    const ingredients = useContext(IngredientsDataContex)
-
+    const {state:{ingredients}} = useContext(IngredientsDataContex)
+    
     return (
         <div className={styles.wrapper}>
             <div><h2 className={`${styles.h2} mt-10 mb-5`}>Собери бургер</h2></div>
