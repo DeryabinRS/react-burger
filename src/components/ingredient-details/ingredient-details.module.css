@@ -1,0 +1,26 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.name{
+    font-family: 'Jet Brains Mono';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+}
+.desc{
+    display: flex;
+    font-family: 'Jet Brains Mono';
+    font-size: 16px;
+    line-height: 24px;
+    color: #8585AD;
+}
+.desc span{
+    display: block;
+    text-align: center;
+    font-family: 'Iceland';
+    font-size: 28px;
+    margin-top: 10px;
+}

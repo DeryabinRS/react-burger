@@ -1,0 +1,23 @@
+.modal{
+    border-radius: 20px;
+    background-color: #1C1C21;
+    min-width: 550px;
+    min-height: 250px;
+    padding: 40px 40px 60px;
+    transition: 0.4s all;
+}
+
+.modal_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal_header .title{
+    font-family: 'Jet Brains Mono';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+}
+.modal_header .btn_close{
+    cursor: pointer;
+}

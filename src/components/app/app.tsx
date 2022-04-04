@@ -1,18 +1,37 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import AppHeader from "../app-header/app-header";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import { burgerList } from "../../utils/data";
 import styles from './app.module.css';
 
-
 function App() {
-  	return (
-	  	<div className="App">  
-			<AppHeader/>
+
+	const apiIngredients = 'https://norma.nomoreparties.space/api/ingredients'
+
+	const [ingredients, setIngredients] = useState([])
+
+	useEffect(() => {
+		const fetchIngredients = async () => {
+			try {
+				const response: any = await fetch(apiIngredients)
+				if (!response.ok) {
+					throw new Error('Ответ сети не был ok');
+				}
+				const res = await response.json();
+				setIngredients(res.data)
+			} catch (error:any) {
+				console.log('Возникла проблема с вашим fetch запросом:', error.message);
+			}
+		}
+		fetchIngredients()
+	}, [])
+
+	return (
+		<div className="App">
+			<AppHeader />
 			<div className={styles.container}>
-				<BurgerIngredients burgerList={burgerList}/>
-				<BurgerConstructor/>
+				<BurgerIngredients burgerList={ingredients} />
+				<BurgerConstructor burgerList={ingredients} />
 			</div>
 		</div>
 	);
