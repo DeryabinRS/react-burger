@@ -2,14 +2,13 @@ import React, { FC, useContext } from 'react'
 import styles from './burger-ingredients.module.css'
 import IngredientsCard from '../ingredients-card/ingredients-card'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { IngredientsDataContex, SelectedIngredientsContex } from '../../services/ingredientsService'
+import { IngredientsDataContex } from '../../services/ingredientsService'
 
 const BurgerIngredients: FC = (): JSX.Element => {
     const [current, setCurrent] = React.useState('one')
 
-    const {ingredients} = useContext(IngredientsDataContex)
-    const { selectedIngredients, dispatchIngredientsSelected } = useContext(SelectedIngredientsContex)
-    
+    const { ingredients } = useContext(IngredientsDataContex)
+
     return (
         <div className={styles.wrapper}>
             <div><h2 className={`${styles.h2} mt-10 mb-5`}>Собери бургер</h2></div>
@@ -41,7 +40,5 @@ const BurgerIngredients: FC = (): JSX.Element => {
         </div>
     )
 }
-
-
 
 export default BurgerIngredients

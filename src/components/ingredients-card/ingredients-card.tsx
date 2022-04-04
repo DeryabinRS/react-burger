@@ -1,15 +1,18 @@
-import { FC, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 import { BurgerType } from '../../types/Burger'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './ingredients-card.module.css'
+import { SelectedIngredientsContex } from '../../services/ingredientsService'
 
 const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
     const [isActive, setIsActive] = useState(false)
     const handleToggleModal = (active: boolean) => {
         setIsActive(active)
     }
+
+    const { selectedIngredients, dispatchIngredientsSelected } = useContext(SelectedIngredientsContex)
 
     return (
         <>

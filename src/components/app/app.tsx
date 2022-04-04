@@ -43,14 +43,6 @@ const reducerSelectedIngredients = (state: any, action:any) => {
 			});
 		case 'REMOVE_ITEM':	
 			return console.log('REMOVE');
-				// ...state,
-				// selectedIngredients: state.map(item => {
-				// 	console.log(item);
-				// 	if(item.type === 'bun' && action.payload.type === 'bun'){
-				// 		return action.payload
-				// 	}
-				// 	return item;
-				// })
 			
 		default: return state
 	}
