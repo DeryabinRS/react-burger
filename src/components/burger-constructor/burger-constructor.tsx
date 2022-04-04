@@ -1,11 +1,12 @@
-import { FC, useContext, useState } from 'react'
+import { FC, useContext, useEffect, useState } from 'react'
 import styles from './burger-constructor.module.css'
 import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import img from '@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png'
 import OrderDetails from '../order-details/order-details'
 
 import Modal from '../modal/modal'
-import { IngredientsDataContex } from '../../services/ingredientsService'
+import { IngredientsDataContex, SelectedIngredientsContex } from '../../services/ingredientsService'
+import { BurgerType } from '../../types/Burger'
 
 const BurgerConstructor: FC = () => {
 
@@ -14,9 +15,8 @@ const BurgerConstructor: FC = () => {
 		setIsActive(active)
 	}
 
-	const { state:{ingredients, selectedIngredients}, dispatchState } = useContext(IngredientsDataContex)
-	
-	//dispatchState({type:'ADD_SELECTED_INGREDIENT'})
+	const {ingredients} = useContext(IngredientsDataContex)
+	const { selectedIngredients, dispatchIngredientsSelected } = useContext(SelectedIngredientsContex)
 
 	return (
 
@@ -32,7 +32,7 @@ const BurgerConstructor: FC = () => {
 			</div>
 			<div className={`${styles.wrapper} scroll pr-2`}>
 				{
-					selectedIngredients.filter(item => item.type !== 'bun').map(item => (
+					ingredients.filter((item) => item.type !== 'bun' && selectedIngredients.includes(item._id)).map((item:BurgerType) => (
 						<div key={item._id} className={`${styles.element} pb-4`}>
 							<div className='pr-2'>
 								<DragIcon type="primary" />
