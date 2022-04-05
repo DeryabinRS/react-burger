@@ -12,7 +12,7 @@ const BurgerConstructor: FC = () => {
 	const [order, setOrder] = useState(0)
 	
 	const { selectedIngredients } = useContext(SelectedIngredientsContex)
-	const getBun = selectedIngredients.filter((item) => item.type === 'bun').shift()
+	const getBun = selectedIngredients.find((item) => item.type === 'bun')
 	const initialStatePrice = 0;
 
 	const reducerPrice = (state:any, action: any) => {
@@ -45,7 +45,6 @@ const BurgerConstructor: FC = () => {
 				throw Error('Ошибка запроса')
 			}
 			const res = await response.json()
-			console.log(res);
 			setOrder(res.order.number)
 		} catch (error) {
 			console.log(error);

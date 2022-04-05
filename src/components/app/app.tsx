@@ -10,7 +10,6 @@ import styles from './app.module.css';
 const initialIngredientsState:BurgerType[] = []
 
 const reducerIngredients = (state: BurgerType[], action:any) => {
-	//console.log(action, state);
 	switch (action.type){
 		case 'LOAD':
 			return action.payload
@@ -21,12 +20,10 @@ const reducerIngredients = (state: BurgerType[], action:any) => {
 
 const initialSelectedIngredientsState = selectedIngredients
 
-const reducerSelectedIngredients = (state: any, action:any) => {
-	console.log(action);
+const reducerSelectedIngredients = (state: any, action:{ type: string, payload: BurgerType }) => {
 	switch (action.type){
 		case 'ADD':	
 			return state.map((item:any) => {
-				console.log(item);
 				if(item.type === 'bun' && action.payload.type === 'bun'){
 					return action.payload
 				}
@@ -46,8 +43,6 @@ function App() {
 	const [ingredients, dispatchIngredients] = useReducer(reducerIngredients, initialIngredientsState)
 	const [selectedIngredients, dispatchIngredientsSelected] = useReducer(reducerSelectedIngredients, initialSelectedIngredientsState)
 
-	//dispatchIngredientsSelected({type: 'ADD', payload:"60666c42cc7b410027a1a9b1"})
-
 	useEffect(() => {
 		const fetchIngredients = async () => {
 			try {
@@ -56,7 +51,6 @@ function App() {
 					throw new Error('Ответ сети не был ok');
 				}
 				const res = await response.json();
-				//console.log(res);
 				dispatchIngredients({ type:'LOAD', payload: res.data })
 			} catch (error:any) {
 				console.log('Возникла проблема с вашим fetch запросом:', error.message);
@@ -66,17 +60,17 @@ function App() {
 	}, [])
 
 	return (
-		<IngredientsDataContex.Provider value={{ingredients, dispatchIngredients}}>
-			<SelectedIngredientsContex.Provider value={{selectedIngredients, dispatchIngredientsSelected}}>
 				<div className="App">
 					<AppHeader />
 					<div className={styles.container}>
-						<BurgerIngredients />
-							<BurgerConstructor />
+						<IngredientsDataContex.Provider value={{ingredients, dispatchIngredients}}>
+							<SelectedIngredientsContex.Provider value={{selectedIngredients, dispatchIngredientsSelected}}>
+								<BurgerIngredients />
+								<BurgerConstructor />
+							</SelectedIngredientsContex.Provider>
+						</IngredientsDataContex.Provider>
 					</div>
 				</div>
-			</SelectedIngredientsContex.Provider>
-		</IngredientsDataContex.Provider>
 	);
 }
 
