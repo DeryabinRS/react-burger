@@ -10,7 +10,7 @@ export const IngredientsDataContex = createContext<{
 });
 
 export const SelectedIngredientsContex = createContext<{
-    selectedIngredients: string[] ;
+    selectedIngredients: BurgerType[] ;
     dispatchIngredientsSelected: Dispatch<any>;
 }>({
     selectedIngredients: [],

@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from "react";
 import { IngredientsDataContex, SelectedIngredientsContex } from "../../services/ingredientsService";
 import { BurgerType } from "../../types/Burger";
+import { selectedIngredients } from "../../utils/data";
 import AppHeader from "../app-header/app-header";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
@@ -18,17 +19,7 @@ const reducerIngredients = (state: BurgerType[], action:any) => {
 	}
 }
 
-const initialSelectedIngredientsState:string[] = [
-	"60d3b41abdacab0026a733c6",
-	"60d3b41abdacab0026a733c8",
-	"60d3b41abdacab0026a733c9",
-	"60d3b41abdacab0026a733c9",
-	"60d3b41abdacab0026a733cc",
-	"60d3b41abdacab0026a733d0",
-	"60d3b41abdacab0026a733d0",
-	"60d3b41abdacab0026a733d1",
-	"60d3b41abdacab0026a733d3",
-]
+const initialSelectedIngredientsState = selectedIngredients
 
 const reducerSelectedIngredients = (state: any, action:any) => {
 	console.log(action);
