@@ -1,9 +1,10 @@
-import { FC, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 import { BurgerType } from '../../types/Burger'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './ingredients-card.module.css'
+import { SelectedIngredientsContex } from '../../services/ingredientsService'
 
 const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
     const [isActive, setIsActive] = useState(false)
@@ -11,6 +12,8 @@ const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
         setIsActive(active)
     }
 
+    const { selectedIngredients } = useContext(SelectedIngredientsContex)
+    const countIngredients = selectedIngredients.filter(item => props._id === item._id).length
     return (
         <>
             <Modal title="Детали ингредиента" isActive={isActive} handleToggleModal={handleToggleModal} >
@@ -24,7 +27,11 @@ const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
                 />
             </Modal>
             <div className={`${styles.card} pt-6 mr-4 ml-4`}>
-                <div className={styles.counter}><Counter count={1} size="default" /></div>
+                <div className={styles.counter}>
+                {!!countIngredients && 
+                    <Counter count={countIngredients} size="default" />
+                }
+                </div>
                 <div onClick={() => handleToggleModal(true)} className={styles.image}>
                     <img src={props.image_large} alt={props.name} />
                 </div>
