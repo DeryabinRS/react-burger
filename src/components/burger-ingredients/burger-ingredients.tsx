@@ -1,13 +1,19 @@
-import React, { FC, useContext } from 'react'
+import React, { FC, useEffect } from 'react'
 import styles from './burger-ingredients.module.css'
 import IngredientsCard from '../ingredients-card/ingredients-card'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { IngredientsDataContex } from '../../services/ingredientsService'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { fetchIngredients } from '../../services/store/actions/action-creator'
 
 const BurgerIngredients: FC = (): JSX.Element => {
+    const dispatch = useAppDispatch()
     const [current, setCurrent] = React.useState('one')
 
-    const { ingredients } = useContext(IngredientsDataContex)
+    const {ingredients} = useAppSelector(state => state.ingredientsSlice)
+
+    useEffect(() => {
+        dispatch(fetchIngredients())
+    },[])
 
     return (
         <div className={styles.wrapper}>

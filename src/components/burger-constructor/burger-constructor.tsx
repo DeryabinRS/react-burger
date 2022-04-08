@@ -1,17 +1,19 @@
-import { FC, useContext, useState, useReducer, useEffect } from 'react'
+import { FC, useState, useReducer, useEffect } from 'react'
 import styles from './burger-constructor.module.css'
 import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import OrderDetails from '../order-details/order-details'
 
 import Modal from '../modal/modal'
-import { SelectedIngredientsContex } from '../../services/ingredientsService'
+
+import { useAppSelector } from '../../hooks/redux'
 
 const BurgerConstructor: FC = () => {
 
 	const [isActive, setIsActive] = useState(false)
 	const [order, setOrder] = useState(0)
 	
-	const { selectedIngredients } = useContext(SelectedIngredientsContex)
+	const {selectedIngredients} = useAppSelector(state => state.ingredientsSlice)
+
 	const getBun = selectedIngredients.find((item) => item.type === 'bun')
 	const initialStatePrice = 0;
 
