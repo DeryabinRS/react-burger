@@ -3,7 +3,7 @@ import styles from './burger-ingredients.module.css'
 import IngredientsCard from '../ingredients-card/ingredients-card'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { fetchIngredients } from '../../services/store/actions/action-creator'
+import { fetchIngredients } from '../../services/store/actions/action-ingredients'
 
 const BurgerIngredients: FC = (): JSX.Element => {
     const dispatch = useAppDispatch()
