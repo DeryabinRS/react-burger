@@ -1,6 +1,7 @@
 .burger_constructor{
     display: 'flex';
     flexDirection: 'column';
+    width: 600px;
 }
 .wrapper{
     max-height: 560px;
@@ -22,4 +23,10 @@
     font-weight: 400;
     font-size: 48px;
     line-height: 36px;
+}
+.empty_constructor{
+    font-family: 'Jet Brains Mono';
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: normal;
 }

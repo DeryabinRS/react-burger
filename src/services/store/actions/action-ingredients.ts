@@ -1,5 +1,5 @@
 import { AppDispatch } from '../index'
-import {ingredientsSlice} from '../reducers/ingredients-slice'
+import { ingredientsSlice } from '../reducers/ingredients-slice'
 
 export const fetchIngredients = () => async(dispatch:AppDispatch) => {
     const apiIngredients:string = 'https://norma.nomoreparties.space/api/ingredients'

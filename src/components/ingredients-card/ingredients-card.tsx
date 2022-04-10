@@ -1,4 +1,5 @@
 import { FC, useContext, useState } from 'react'
+import { useDrag } from 'react-dnd'
 import { BurgerType } from '../../types/Burger'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal'
@@ -11,6 +12,16 @@ const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
     const handleToggleModal = (active: boolean) => {
         setIsActive(active)
     }
+
+    const [{ isDragging }, dragRef]:any = useDrag({
+        type: 'ingredient',
+        item: {...props},
+        collect: (monitor) => ({
+            isDragging: monitor.isDragging(),
+        }),
+    });
+
+    const opacity = isDragging ? 0.2 : 1;
 
     const { selectedIngredients } = useContext(SelectedIngredientsContex)
     const countIngredients = selectedIngredients.filter(item => props._id === item._id).length
@@ -26,7 +37,7 @@ const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
                     calories={props.calories}
                 />
             </Modal>
-            <div className={`${styles.card} pt-6 mr-4 ml-4`}>
+            <div className={`${styles.card} pt-6 mr-4 ml-4`} ref={dragRef} style={{opacity}}>
                 <div className={styles.counter}>
                 {!!countIngredients && 
                     <Counter count={countIngredients} size="default" />

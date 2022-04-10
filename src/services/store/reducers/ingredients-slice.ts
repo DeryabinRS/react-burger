@@ -25,13 +25,18 @@ export const ingredientsSlice = createSlice({
         ingredientsFetchingSuccess(state, action: PayloadAction<BurgerType[]>){
             state.isLoading = false
             state.error = ''
-            state.ingredients = action.payload;
+            state.ingredients = action.payload
         },
         ingredientsFetchingError(state, action: PayloadAction<string>){
             state.isLoading = false;
             state.error = action.payload
-        }
+        },
+        selectedIngredientsAdd(state, action: PayloadAction<BurgerType>){
+            state.selectedIngredients = [...state.selectedIngredients, action.payload]
+        },
     }
 })
+
+export const { selectedIngredientsAdd } = ingredientsSlice.actions
 
 export default ingredientsSlice.reducer;
