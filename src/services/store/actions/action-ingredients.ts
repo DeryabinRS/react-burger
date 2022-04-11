@@ -18,20 +18,21 @@ export const fetchIngredients = () => async(dispatch:AppDispatch) => {
 
 export const fetchOdrer = (ingredients:any[]) => async(dispatch:AppDispatch) => {
     const apiOrder = 'https://norma.nomoreparties.space/api/orders'
-        console.log(ingredients)
+        console.log(JSON.stringify(ingredients))
 		try {
             dispatch(ingredientsSlice.actions.fetching())
 			const response = await fetch(apiOrder,{
 				method: 'POST',
 				headers: {'Content-Type': 'application/json;charset=utf-8'},
-				body: JSON.stringify(ingredients)
+				body: JSON.stringify({ingredients})
 			})
+            console.log(response)
 			if(!response.ok){
 				throw Error('Ошибка запроса')
 			}
 			const res = await response.json()
             console.log(res)
-			//dispatch(ingredientsSlice.actions.orderFetchingSuccess([...res.data]))
+			dispatch(ingredientsSlice.actions.orderFetchingSuccess([...res.data.order.number]))
 		} catch (error:any) {
 			dispatch(ingredientsSlice.actions.fetchingError(`Возникла проблема с вашим fetch запросом: ${error.message}`))
 		}
