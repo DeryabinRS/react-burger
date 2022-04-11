@@ -7,7 +7,7 @@ import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
 
 import { useAppSelector, useAppDispatch } from '../../hooks/redux'
-import { selectedIngredientsAdd, selectedIngredientsUpdate } from '../../services/store/reducers/ingredients-slice'
+import { selectedIngredientsAdd, selectedIngredientsClear, selectedIngredientsUpdate, setOrder } from '../../services/store/reducers/ingredients-slice'
 import BurgerIngredientCard from './burger-ingredient-card'
 import { fetchOdrer } from '../../services/store/actions/action-ingredients'
 
@@ -27,10 +27,16 @@ const BurgerConstructor: FC = () => {
     }));
 
 	const handleToggleModal = (active:boolean) => {
-		setIsActive(active)
-		const ingredients = selectedIngredients.map(item => item._id)
-		const ingredientsWithBun = [...ingredients, selectedBun?._id]
-		dispatch(fetchOdrer(ingredientsWithBun))
+		if(active){
+			const ingredients = selectedIngredients.map(item => item._id)
+			const ingredientsWithBun = [...ingredients, selectedBun?._id]
+			dispatch(fetchOdrer(ingredientsWithBun))
+			setIsActive(active)
+		}else{
+			dispatch(setOrder('0000'))
+			dispatch(selectedIngredientsClear())
+			setIsActive(active)
+		}
 	}
 
 	 const moveCard = useCallback((dragIndex, hoverIndex) => {

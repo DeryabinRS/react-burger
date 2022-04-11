@@ -37,13 +37,13 @@ export const ingredientsSlice = createSlice({
         },
         
         //INGREDIENTS API
-        ingredientsFetchingSuccess(state, action: PayloadAction<BurgerType[]>){
+        setIngredients(state, action: PayloadAction<BurgerType[]>){
             state.isLoading = false
             state.error = ''
             state.ingredients = action.payload
         },
         //ORDER API
-        orderFetchingSuccess(state, action){
+        setOrder(state, action){
             state.numOrder = action.payload
         },
 
@@ -62,6 +62,11 @@ export const ingredientsSlice = createSlice({
         selectedIngredientDelete(state, action: PayloadAction<string>){
             state.selectedIngredients = state.selectedIngredients.filter(item => item.dragId !== action.payload)
         },
+        selectedIngredientsClear(state){
+            state.selectedIngredients = []
+            state.selectedBun = null 
+            state.statePrice = 0
+        },
         currentIngredientAdd(state, action:PayloadAction<BurgerType>){
             state.currentIngredient = action.payload
         },
@@ -76,7 +81,9 @@ export const {
     currentIngredientAdd, 
     currentIngredientRemove, 
     selectedIngredientsUpdate, 
-    selectedIngredientDelete
+    selectedIngredientDelete,
+    selectedIngredientsClear,
+    setOrder,
 } = ingredientsSlice.actions
 
 export default ingredientsSlice.reducer;
