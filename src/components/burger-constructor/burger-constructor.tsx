@@ -29,7 +29,8 @@ const BurgerConstructor: FC = () => {
 	const handleToggleModal = (active:boolean) => {
 		setIsActive(active)
 		const ingredients = selectedIngredients.map(item => item._id)
-		dispatch(fetchOdrer([...ingredients, selectedBun?._id]))
+		const ingredientsWithBun = [...ingredients, selectedBun?._id]
+		dispatch(fetchOdrer(ingredientsWithBun))
 	}
 
 	 const moveCard = useCallback((dragIndex, hoverIndex) => {
