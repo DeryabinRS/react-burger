@@ -9,8 +9,6 @@ const BurgerIngredients: FC = (): JSX.Element => {
     const dispatch = useAppDispatch()
     const [current, setCurrent] = React.useState('one')
 
-
-
     const {ingredients} = useAppSelector(state => state.ingredientsSlice)
 
     useEffect(() => {

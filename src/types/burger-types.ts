@@ -12,6 +12,7 @@ export interface BurgerType
     image_mobile: string;
     image_large: string;
     __v: number;
+    dragId?:any;
 }
 
 export interface BurgerListType{
