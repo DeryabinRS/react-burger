@@ -28,18 +28,25 @@ export const ingredientsSlice = createSlice({
     name: 'ingredients',
     initialState: initialState,
     reducers:{
-        ingredientsFetching(state){
+        fetching(state){
             state.isLoading = true
         },
+        fetchingError(state, action: PayloadAction<string>){
+            state.isLoading = false
+            state.error = action.payload
+        },
+        
+        //INGREDIENTS API
         ingredientsFetchingSuccess(state, action: PayloadAction<BurgerType[]>){
             state.isLoading = false
             state.error = ''
             state.ingredients = action.payload
         },
-        ingredientsFetchingError(state, action: PayloadAction<string>){
-            state.isLoading = false
-            state.error = action.payload
+        //ORDER API
+        orderFetchingSuccess(state, action){
+            state.numOrder = action.payload
         },
+
         selectedIngredientsAdd(state, action: PayloadAction<BurgerType>){
             if(action.payload.type === 'bun'){
                 state.selectedBun = action.payload
@@ -61,9 +68,6 @@ export const ingredientsSlice = createSlice({
         currentIngredientRemove(state, action:PayloadAction<null>){
             state.currentIngredient = action.payload
         },
-        getOrderNumber(state, action){
-            state.numOrder = action.payload
-        },
     }
 })
 
@@ -72,7 +76,7 @@ export const {
     currentIngredientAdd, 
     currentIngredientRemove, 
     selectedIngredientsUpdate, 
-    selectedIngredientDelete 
+    selectedIngredientDelete
 } = ingredientsSlice.actions
 
 export default ingredientsSlice.reducer;

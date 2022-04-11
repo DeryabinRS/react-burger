@@ -1,7 +1,7 @@
 import { FC, useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
 import styles from './burger-constructor.module.css'
-import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import OrderDetails from '../order-details/order-details'
 
 import Modal from '../modal/modal'
@@ -9,13 +9,13 @@ import Modal from '../modal/modal'
 import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { selectedIngredientsAdd, selectedIngredientsUpdate } from '../../services/store/reducers/ingredients-slice'
 import BurgerIngredientCard from './burger-ingredient-card'
+import { fetchOdrer } from '../../services/store/actions/action-ingredients'
 
 const BurgerConstructor: FC = () => {
 	const dispatch = useAppDispatch()
 	const [isActive, setIsActive] = useState(false)
-	const [order, setOrder] = useState(0)
 	
-	const {selectedIngredients, selectedBun, statePrice} = useAppSelector(state => state.ingredientsSlice)
+	const {selectedIngredients, selectedBun, statePrice, numOrder} = useAppSelector(state => state.ingredientsSlice)
 
 	const ingredients = selectedIngredients.filter(item => item.type !== 'bun')
 
@@ -26,31 +26,10 @@ const BurgerConstructor: FC = () => {
         },
     }));
 
-
-	const createOrder = async (ingredients:{}) => {
-		const API = 'https://norma.nomoreparties.space/api/orders'
-		try {
-			const response = await fetch(API,{
-				method: 'POST',
-				headers: {'Content-Type': 'application/json;charset=utf-8'},
-				body: JSON.stringify(ingredients)
-			})
-			if(!response.ok){
-				throw Error('Ошибка запроса')
-			}
-			const res = await response.json()
-			setOrder(res.order.number)
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
 	const handleToggleModal = (active:boolean) => {
 		setIsActive(active)
-		const ingredients = {
-			ingredients: selectedIngredients.map(item => item._id)
-		}
-		createOrder(ingredients);
+		const ingredients = selectedIngredients.map(item => item._id)
+		dispatch(fetchOdrer([...ingredients, selectedBun?._id]))
 	}
 
 	 const moveCard = useCallback((dragIndex, hoverIndex) => {
@@ -111,7 +90,7 @@ const BurgerConstructor: FC = () => {
 				>Оформить заказ</Button>
 			</div>
 			<Modal isActive={isActive} handleToggleModal={handleToggleModal}>
-				<OrderDetails id={`${order}`} />
+				<OrderDetails id={`${numOrder}`} />
 			</Modal>
 		</div>
 
