@@ -1,8 +1,10 @@
 import { AppDispatch } from '../index'
 import { ingredientsSlice } from '../reducers/ingredients-slice'
 
+const API = 'https://norma.nomoreparties.space/api'
+
 export const fetchIngredients = () => async(dispatch:AppDispatch) => {
-    const apiIngredients:string = 'https://norma.nomoreparties.space/api/ingredients'
+    const apiIngredients:string = `${API}/ingredients`
     try {
         dispatch(ingredientsSlice.actions.fetching())
         const response: any = await fetch(apiIngredients)
@@ -17,7 +19,7 @@ export const fetchIngredients = () => async(dispatch:AppDispatch) => {
 }
 
 export const fetchOdrer = (ingredients:any[]) => async(dispatch:AppDispatch) => {
-    const apiOrder = 'https://norma.nomoreparties.space/api/orders'
+    const apiOrder = `${API}/orders`
 		try {
             dispatch(ingredientsSlice.actions.fetching())
 			const response = await fetch(apiOrder,{

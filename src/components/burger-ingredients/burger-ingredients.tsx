@@ -1,12 +1,12 @@
-import { FC, useState, useEffect, useRef } from 'react'
+import { FC, useState, useRef } from 'react'
 import styles from './burger-ingredients.module.css'
 import IngredientsCard from '../ingredients-card/ingredients-card'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { fetchIngredients } from '../../services/store/actions/action-ingredients'
+import { useAppSelector } from '../../hooks/redux'
+
 
 const BurgerIngredients: FC = (): JSX.Element => {
-    const dispatch = useAppDispatch()
+    
     const [current, setCurrent] = useState('one')
 
     const refBlock = useRef<HTMLDivElement>(null)
@@ -16,9 +16,13 @@ const BurgerIngredients: FC = (): JSX.Element => {
 
     const {ingredients} = useAppSelector(state => state.ingredientsSlice)
 
-    useEffect(() => {
-        dispatch(fetchIngredients())
-    },[])
+    const filterByType = (type: string) => {
+        return ingredients.filter(item => item.type === type).map(item => <IngredientsCard key={item._id} {...item} />)
+    }
+
+    const ingredientsTypeBun = filterByType('bun')
+    const ingredientsTypeSauce = filterByType('sauce')
+    const ingredientsTypeMain = filterByType('main')
 
     const handleScroll = () => {
         const scrollY = refBlock?.current?.scrollTop || 0
@@ -52,19 +56,19 @@ const BurgerIngredients: FC = (): JSX.Element => {
                 <div ref={refTitle1} id="one">
                     <h2 className={styles.title} >Булки</h2>
                     <div className={`${styles.ingredient_list} mb-10`}>
-                        {ingredients.filter(item => item.type === 'bun').map(item => <IngredientsCard key={item._id} {...item} />)}
+                        {ingredientsTypeBun}
                     </div>
                 </div>
                 <div ref={refTitle2} id="two">
                     <h2 className={styles.title} >Соусы</h2>
                     <div className={`${styles.ingredient_list} mb-10`}>
-                        {ingredients.filter(item => item.type === 'sauce').map(item => <IngredientsCard key={item._id} {...item} />)}
+                        {ingredientsTypeSauce}
                     </div>
                 </div>
                 <div ref={refTitle3} id="three">
                     <h2 className={styles.title} >Начинки</h2>
                     <div className={`${styles.ingredient_list} mb-10`}>
-                        {ingredients.filter(item => item.type === 'main').map(item => <IngredientsCard key={item._id} {...item} />)}
+                        {ingredientsTypeMain}
                     </div>
                 </div>
             </div>

@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { BurgerType } from "../../../types/burger-types";
 
@@ -51,7 +50,7 @@ export const ingredientsSlice = createSlice({
             if(action.payload.type === 'bun'){
                 state.selectedBun = action.payload
             }else{
-                state.selectedIngredients = [...state.selectedIngredients, {...action.payload, dragId: uuidv4()}]
+                state.selectedIngredients = [...state.selectedIngredients, {...action.payload}]
             }
             const priceBun = state.selectedBun?.price || 0
             state.statePrice = state.selectedIngredients.reduce((prev, item) => prev += item.price, 0) + priceBun

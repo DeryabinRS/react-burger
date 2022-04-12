@@ -1,4 +1,5 @@
 import { FC, useCallback, useState } from 'react'
+import { v4 as uuidv4 } from "uuid";
 import { useDrop } from 'react-dnd'
 import styles from './burger-constructor.module.css'
 import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -10,6 +11,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { selectedIngredientsAdd, selectedIngredientsClear, selectedIngredientsUpdate, setOrder } from '../../services/store/reducers/ingredients-slice'
 import BurgerIngredientCard from './burger-ingredient-card'
 import { fetchOdrer } from '../../services/store/actions/action-ingredients'
+import { BurgerType } from '../../types/burger-types'
 
 const BurgerConstructor: FC = () => {
 	const dispatch = useAppDispatch()
@@ -21,8 +23,8 @@ const BurgerConstructor: FC = () => {
 
 	const [, dropRef] = useDrop(() => ({
         accept: "ingredient",
-        drop(item:any) {
-            dispatch(selectedIngredientsAdd(item));
+        drop(item:BurgerType) {
+            dispatch(selectedIngredientsAdd({...item, dragId: uuidv4()}));
         },
     }));
 
