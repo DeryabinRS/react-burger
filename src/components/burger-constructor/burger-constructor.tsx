@@ -8,16 +8,18 @@ import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
 
 import { useAppSelector, useAppDispatch } from '../../hooks/redux'
-import { selectedIngredientsAdd, selectedIngredientsClear, selectedIngredientsUpdate, setOrder } from '../../services/store/reducers/ingredients-slice'
+import { setOrder } from '../../services/store/reducers/order-slice'
+import { selectedIngredientsAdd, selectedIngredientsClear, selectedIngredientsUpdate } from '../../services/store/reducers/constructor-slice'
 import BurgerIngredientCard from './burger-ingredient-card'
-import { fetchOdrer } from '../../services/store/actions/action-ingredients'
+import { fetchOdrer } from '../../services/store/actions/action-order'
 import { BurgerType } from '../../types/burger-types'
 
 const BurgerConstructor: FC = () => {
 	const dispatch = useAppDispatch()
 	const [isActive, setIsActive] = useState(false)
 	
-	const {selectedIngredients, selectedBun, statePrice, numOrder} = useAppSelector(state => state.ingredientsSlice)
+	const { selectedIngredients, selectedBun, statePrice } = useAppSelector(state => state.constructorSlice)
+	const { numOrder } = useAppSelector(state => state.orderSlice)
 
 	const ingredients = selectedIngredients.filter(item => item.type !== 'bun')
 
@@ -98,9 +100,11 @@ const BurgerConstructor: FC = () => {
 					disabled={selectedIngredients.length === 0 || !!!selectedBun}
 				>Оформить заказ</Button>
 			</div>
-			<Modal isActive={isActive} handleToggleModal={handleToggleModal}>
-				<OrderDetails id={`${numOrder}`} />
-			</Modal>
+			{isActive &&
+				<Modal isActive={isActive} handleToggleModal={handleToggleModal}>
+					<OrderDetails id={`${numOrder}`} />
+				</Modal>
+			}
 		</div>
 
 	)

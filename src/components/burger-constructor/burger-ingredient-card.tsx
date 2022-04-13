@@ -3,7 +3,7 @@ import { useDrag, useDrop } from 'react-dnd'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-constructor.module.css'
 import { useAppDispatch } from "../../hooks/redux";
-import { selectedIngredientDelete } from "../../services/store/reducers/ingredients-slice";
+import { selectedIngredientDelete } from "../../services/store/reducers/constructor-slice";
 
 interface BurgerIngredientCardType{
 	index: number; //unique key

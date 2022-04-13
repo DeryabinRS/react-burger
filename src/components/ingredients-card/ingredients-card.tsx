@@ -27,13 +27,22 @@ const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
 
     const opacity = isDragging ? 0.2 : 1;
 
-    const selectedIngredients = useAppSelector(store => store.ingredientsSlice.selectedIngredients)
-    const countIngredients = selectedIngredients.filter(item => props._id === item._id).length
+    const {selectedIngredients, selectedBun} = useAppSelector(store => store.constructorSlice)
+
+    let countIngredients: number = 0;
+
+    selectedBun ?
+    countIngredients = [...selectedIngredients, selectedBun].filter(item => props._id === item._id).length
+    :
+    countIngredients = [...selectedIngredients].filter(item => props._id === item._id).length
+
     return (
         <>
+            { isActive &&
             <Modal title="Детали ингредиента" isActive={isActive} handleToggleModal={handleToggleModal} >
                 <IngredientDetails />
             </Modal>
+            }
             <div className={`${styles.card} pt-6 mr-4 ml-4`} ref={dragRef} style={{opacity}}>
                 <div className={styles.counter}>
                 {!!countIngredients && 
