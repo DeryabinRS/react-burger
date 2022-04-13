@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useState, useCallback } from 'react'
 import { useDrag } from 'react-dnd'
 import { BurgerType } from '../../types/burger-types'
 import IngredientDetails from '../ingredient-details/ingredient-details'
@@ -12,10 +12,10 @@ const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
     const [isActive, setIsActive] = useState(false)
     const dispatch = useAppDispatch();
 
-    const handleToggleModal = (active: boolean) => {
+    const handleToggleModal = useCallback((active: boolean) => {
         active ? dispatch(currentIngredientAdd(props)) : dispatch(currentIngredientRemove(null))
         setIsActive(active)
-    }
+    },[])
 
     const [{ isDragging }, dragRef]:any = useDrag({
         type: 'ingredient',
