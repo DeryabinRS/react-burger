@@ -1,4 +1,4 @@
-import { FC, useState, useCallback } from 'react'
+import { FC, useState, useCallback, useMemo } from 'react'
 import { useDrag } from 'react-dnd'
 import { BurgerType } from '../../types/burger-types'
 import IngredientDetails from '../ingredient-details/ingredient-details'
@@ -29,12 +29,9 @@ const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
 
     const {selectedIngredients, selectedBun} = useAppSelector(store => store.constructorSlice)
 
-    let countIngredients: number = 0;
+    const ingredients = selectedBun ? [...selectedIngredients, selectedBun] : [...selectedIngredients]
 
-    selectedBun ?
-    countIngredients = [...selectedIngredients, selectedBun].filter(item => props._id === item._id).length
-    :
-    countIngredients = [...selectedIngredients].filter(item => props._id === item._id).length
+    const countIngredients: number = useMemo(() => ingredients.filter((item:any) => props._id === item._id).length, [ingredients.length])
 
     return (
         <>
