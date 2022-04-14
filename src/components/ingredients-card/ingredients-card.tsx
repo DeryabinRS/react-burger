@@ -1,32 +1,46 @@
-import { FC, useContext, useState } from 'react'
-import { BurgerType } from '../../types/Burger'
+import { FC, useState, useCallback, useMemo } from 'react'
+import { useDrag } from 'react-dnd'
+import { BurgerType } from '../../types/burger-types'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './ingredients-card.module.css'
-import { SelectedIngredientsContex } from '../../services/ingredientsService'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { currentIngredientAdd, currentIngredientRemove } from '../../services/store/reducers/ingredients-slice'
 
 const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
     const [isActive, setIsActive] = useState(false)
-    const handleToggleModal = (active: boolean) => {
-        setIsActive(active)
-    }
+    const dispatch = useAppDispatch();
 
-    const { selectedIngredients } = useContext(SelectedIngredientsContex)
-    const countIngredients = selectedIngredients.filter(item => props._id === item._id).length
+    const handleToggleModal = useCallback((active: boolean) => {
+        active ? dispatch(currentIngredientAdd(props)) : dispatch(currentIngredientRemove(null))
+        setIsActive(active)
+    },[])
+
+    const [{ isDragging }, dragRef]:any = useDrag({
+        type: 'ingredient',
+        item: {...props},
+        collect: (monitor) => ({
+            isDragging: monitor.isDragging(),
+        }),
+    });
+
+    const opacity = isDragging ? 0.2 : 1;
+
+    const {selectedIngredients, selectedBun} = useAppSelector(store => store.constructorSlice)
+
+    const ingredients = selectedBun ? [...selectedIngredients, selectedBun] : [...selectedIngredients]
+
+    const countIngredients: number = useMemo(() => ingredients.filter((item:any) => props._id === item._id).length, [ingredients.length])
+
     return (
         <>
+            { isActive &&
             <Modal title="Детали ингредиента" isActive={isActive} handleToggleModal={handleToggleModal} >
-                <IngredientDetails
-                    image={props.image_large}
-                    name={props.name}
-                    proteins={props.proteins}
-                    fat={props.fat}
-                    carbohydrates={props.carbohydrates}
-                    calories={props.calories}
-                />
+                <IngredientDetails />
             </Modal>
-            <div className={`${styles.card} pt-6 mr-4 ml-4`}>
+            }
+            <div className={`${styles.card} pt-6 mr-4 ml-4`} ref={dragRef} style={{opacity}}>
                 <div className={styles.counter}>
                 {!!countIngredients && 
                     <Counter count={countIngredients} size="default" />

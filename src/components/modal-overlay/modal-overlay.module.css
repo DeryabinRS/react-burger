@@ -8,5 +8,5 @@
     align-items: center;
     justify-content: center;
     z-index: 1;
-    background: #585858;
+    background: rgb(0, 0, 0, .6);
 }

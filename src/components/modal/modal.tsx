@@ -19,7 +19,7 @@ const Modal: FC<ModalType> = ({ title, children, isActive, handleToggleModal }) 
         return () => {
             document.removeEventListener("keydown", escFunction, false);
         };
-    }, []);
+    }, [handleToggleModal]);
 
     const escFunction = useCallback((event) => {
         if (event.key === "Escape") {

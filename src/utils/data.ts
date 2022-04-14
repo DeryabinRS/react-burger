@@ -1,4 +1,4 @@
-import { BurgerType } from "../types/Burger";
+import { BurgerType } from "../types/burger-types";
 
 export const selectedIngredients:BurgerType[] = [
    {
