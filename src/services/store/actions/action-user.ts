@@ -23,12 +23,17 @@ export const fetchRegister = (email:string, password:string, name:string) => asy
         })
         console.log(response)
         if (!response.ok) {
-            throw new Error('Ошибка авторизации');
+            if(response.status === 403){
+                throw new Error('Такой пользователь уже существует.');
+            }
+            if(response.status === 404){
+                throw new Error('Ошибка запроса регистрации.');
+            }
         }
         const res = await response.json();
         console.log(res)
-        //dispatch(userSlice.actions.register([...res.data]))
+        dispatch(userSlice.actions.register(res))
     } catch (error:any) {
-        dispatch(userSlice.actions.fetchingError(`Возникла проблема с вашим fetch запросом: ${error.message}`))
+        dispatch(userSlice.actions.fetchingError(`Внимание! ${error.message}`))
     }
 }

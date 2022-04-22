@@ -4,6 +4,7 @@ import { TUser } from "../../../types/user";
 type initialStateType = {
     user: TUser | null;
     isLoading: boolean;
+    isError: boolean;
     message: string;
     token: string | null
 }
@@ -11,7 +12,8 @@ type initialStateType = {
 const initialState:initialStateType = {
     user: null,
     isLoading: false,
-    message: 'string',
+    isError: false,
+    message: '',
     token: null,
 }
 
@@ -25,8 +27,10 @@ export const userSlice = createSlice({
             state.isLoading = false
         },
         register(state, action: PayloadAction<any>){
-            state.user = action.payload
+            console.log(action.payload.user)
+            state.user = action.payload.user
             state.isLoading = false
+            state.isError = false
         },
         logout(state){
             state.user = null
@@ -36,10 +40,13 @@ export const userSlice = createSlice({
         },
         fetching(state){
             state.isLoading = true
+            state.isError = false
+            state.message = ''
         },
         fetchingError(state, action: PayloadAction<string>){
             state.isLoading = false
             state.message = action.payload
+            state.isError = true
         },
     }
 })

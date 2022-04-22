@@ -2,11 +2,11 @@ import { FC, useState, ChangeEvent } from "react";
 import { Link } from 'react-router-dom'
 import {
 	Button,
-  EmailInput,
-  PasswordInput,
-  Input,
+	EmailInput,
+	PasswordInput,
+	Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useAppDispatch } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { fetchRegister } from "../services/store/actions/action-user";
 
 const RegisterPage:FC = () => {
@@ -15,6 +15,7 @@ const RegisterPage:FC = () => {
 	const [password, setPassword] = useState("");
 
   	const dispatch = useAppDispatch()
+	const {user, isLoading, isError, message} = useAppSelector(store => store.userSlice)
 
 	const handlerRegister = () => {
 		if(name && email && password){
