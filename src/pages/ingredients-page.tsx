@@ -1,12 +1,11 @@
 import { FC } from 'react'
+import IngredientDetails from '../components/ingredient-details/ingredient-details'
 
-interface IngredientsPageType {
-    id: string;
-}
-
-const IngredientsPage:FC<IngredientsPageType> = ({id}) => {
+const IngredientsPage:FC = () => {
   return (
-    <div>IngredientsPage</div>
+    <div className="container_center mt-25">
+      	<IngredientDetails id='60d3b41abdacab0026a733c6'/>
+    </div>
   )
 }
 

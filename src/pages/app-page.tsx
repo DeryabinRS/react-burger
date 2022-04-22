@@ -7,10 +7,7 @@ import { useAppDispatch } from '../hooks/redux'
 import { fetchIngredients } from '../services/store/actions/action-ingredients'
 
 const AppPage = () => {
-  const dispatch = useAppDispatch()
-	useEffect(() => {
-        dispatch(fetchIngredients())
-    },[dispatch])
+  
   return (
 	<>
 		<DndProvider backend={HTML5Backend}>

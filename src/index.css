@@ -4,9 +4,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Jet Brains Mono';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -19,6 +17,20 @@ code {
 a, a svg{color: #8585AD; fill: #8585AD; text-decoration: none; }
 a:hover, a:hover svg{color: white; fill: white;}
 
+.container_center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container_center h2{
+  font-family: 'Jet Brains Mono';
+  margin: 0;
+}
+
+.container_center a{
+  color: #4C4CFF;
+}
 
 .container{
   max-width: 1240px;
