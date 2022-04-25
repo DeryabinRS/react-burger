@@ -72,11 +72,15 @@ export const userSlice = createSlice({
             state.message = action.payload
             state.isError = true
         },
+        clearMessage(state){
+            state.message = ''
+            state.isError = false
+        }
     }
 })
 
 export const { 
-    
+    clearMessage,
 } = userSlice.actions
 
 export default userSlice.reducer;

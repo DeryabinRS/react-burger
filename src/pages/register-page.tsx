@@ -62,7 +62,7 @@ const RegisterPage:FC = () => {
 				</div>
 			</>
 			)}
-			{isError && <Alert type="danger">{message}</Alert>}
+			{isError && <Alert type="danger" delay={2500}>{message}</Alert>}
 			<div className="mt-20">Уже зарегистрирован? <Link to="/login">Войти</Link></div>
 		</div>
 	);

@@ -63,8 +63,8 @@ export const getUserRequest = (accessToken: string) => async(dispatch:AppDispatc
             cache: 'no-cache',
             credentials: 'same-origin',
             headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + accessToken
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + accessToken
             },
             redirect: 'follow',
             referrerPolicy: 'no-referrer'
@@ -111,7 +111,7 @@ export const logoutRequest = () => async(dispatch:AppDispatch) => {
             body: JSON.stringify({token})
         })
         if (!response.ok) {
-            throw new Error('Ошибка выхода из фккаунта');
+            throw new Error('Ошибка выхода из аккаунта');
         }    
         dispatch(userSlice.actions.logout())
     }catch(error:any){
@@ -119,3 +119,45 @@ export const logoutRequest = () => async(dispatch:AppDispatch) => {
     }
     
 };
+
+export const forgotPassword = (email: string) => async(dispatch:AppDispatch) => {
+    try {
+        dispatch(userSlice.actions.fetching())
+        const response = await fetch(`${API}/password-reset`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email})
+        });
+        if (!response.ok) {
+            throw new Error('Ошибка запроса');
+        }
+        const res = await response.json();
+        console.log(res);
+        //dispatch(userSlice.actions.refreshToken(res))
+    } catch (error:any) {
+        dispatch(userSlice.actions.fetchingError(`Внимание! ${error.message}`))
+    }
+}
+
+export const resetPassword = (password:string, token: string) => async(dispatch:AppDispatch) => {
+    try {
+        dispatch(userSlice.actions.fetching())
+        const response = await fetch(`${API}/password-reset/reset`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({password, token})
+        });
+        if (!response.ok) {
+            throw new Error('Ошибка запроса');
+        }
+        const res = await response.json();
+        console.log(res);
+        //dispatch(userSlice.actions.refreshToken(res))
+    } catch (error:any) {
+        dispatch(userSlice.actions.fetchingError(`Внимание! ${error.message}`))
+    }
+}
