@@ -1,0 +1,8 @@
+.alert{
+    padding: 15px;
+    border: 1px solid rgb(179, 179, 179);
+    border-radius: 5px;
+}
+.danger{
+    background: rgb(221, 134, 134);
+}
