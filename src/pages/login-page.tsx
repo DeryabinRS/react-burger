@@ -1,5 +1,5 @@
 import { FC, useState, ChangeEvent } from "react";
-import { Link, Navigate } from 'react-router-dom'
+import { Link, useLocation, Navigate } from 'react-router-dom'
 import {
 	Button,
 	Input,
@@ -13,6 +13,10 @@ import Loader from "../components/loader/loader";
 const LoginPage: FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const location: any = useLocation()
+
+  const fromPage = location.state?.from?.pathname || '/'
 
   const dispatch = useAppDispatch()
 	const {user, isLoading, isError, message} = useAppSelector(store => store.userSlice)
@@ -31,7 +35,7 @@ const LoginPage: FC = () => {
     setPassword(e.target.value);
   };
 
-  if(!!user) return <Navigate to={'/'} replace/>
+  if(!!user) return <Navigate to={fromPage} replace/>
 
   return (
     <div className="container_center mt-25">

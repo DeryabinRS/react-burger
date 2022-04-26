@@ -13,6 +13,7 @@ import { selectedIngredientsAdd, selectedIngredientsClear, selectedIngredientsUp
 import BurgerIngredientCard from './burger-ingredient-card'
 import { fetchOdrer } from '../../services/store/actions/action-order'
 import { BurgerType } from '../../types/burger-types'
+import PrivateRoute from '../private-route/private-route';
 
 const BurgerConstructor: FC = () => {
 	const dispatch = useAppDispatch()
@@ -101,9 +102,11 @@ const BurgerConstructor: FC = () => {
 				>Оформить заказ</Button>
 			</div>
 			{isActive &&
-				<Modal isActive={isActive} handleToggleModal={handleToggleModal}>
-					<OrderDetails id={`${numOrder}`} />
-				</Modal>
+				<PrivateRoute>
+					<Modal isActive={isActive} handleToggleModal={handleToggleModal}>
+						<OrderDetails id={`${numOrder}`} />
+					</Modal>
+				</PrivateRoute>
 			}
 		</div>
 

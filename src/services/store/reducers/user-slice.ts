@@ -24,7 +24,6 @@ export const userSlice = createSlice({
     reducers:{
         //ORDER API
         login(state, action: PayloadAction<any>){
-            //console.log(action.payload)
             state.user = action.payload.user
             const accessToken = action.payload.accessToken.split('Bearer ')[1]
             state.accessToken = accessToken
@@ -40,7 +39,6 @@ export const userSlice = createSlice({
             state.isError = false
         },
         register(state, action: PayloadAction<any>){
-            //console.log(action.payload.user)
             state.user = action.payload.user
             const accessToken = action.payload.accessToken.split('Bearer ')[1]
             state.accessToken = accessToken
@@ -49,16 +47,23 @@ export const userSlice = createSlice({
             state.isError = false
         },
         setUser(state, action: PayloadAction<any>){
-            console.log(action)
             state.user = action.payload.user
             state.isLoading = false
             state.isError = false
         },
         refreshToken(state, action: PayloadAction<any>){
-            //console.log(action)
             const accessToken = action.payload.accessToken.split('Bearer ')[1]
             state.accessToken = accessToken
             setCookie('token', action.payload.refreshToken)
+            state.isLoading = false
+            state.isError = false
+        },
+        forgotPassword(state){
+            state.isLoading = false
+            state.isError = false
+        },
+        resetPassword(state){
+            state.message = 'Пароль изменен'
             state.isLoading = false
             state.isError = false
         },

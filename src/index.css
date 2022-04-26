@@ -16,6 +16,12 @@ code {
 
 a, a svg{color: #8585AD; fill: #8585AD; text-decoration: none; }
 a:hover, a:hover svg{color: white; fill: white;}
+a.active{
+  color:white;
+}
+a.active svg{
+  fill: white;
+}
 
 .container_center{
   display: flex;

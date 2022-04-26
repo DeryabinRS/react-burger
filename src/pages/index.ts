@@ -4,8 +4,11 @@ import IngredientsPage from "./ingredients-page";
 import LoginPage from "./login-page";
 import RegisterPage from "./register-page";
 import ResetPasswordPage from "./reset-password-page";
-import ProfilePage from "./profile-page";
+import ProfilePage from "./profile-page/profile-page";
 import NotFoundPage from "./notfound-page";
+import ProfilePageData from './profile-page/profile-page-data';
+import ProfilePageOrders from './profile-page/profile-page-orders';
+import ProfilePageOrdersId from './profile-page/profile-page-orders-id';
 
 export {
     AppPage, 
@@ -16,4 +19,7 @@ export {
     ResetPasswordPage,
     ProfilePage,
     NotFoundPage,
+    ProfilePageData,
+    ProfilePageOrders,
+    ProfilePageOrdersId,
 }

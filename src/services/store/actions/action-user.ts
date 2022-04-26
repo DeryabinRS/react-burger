@@ -1,19 +1,18 @@
 import { AppDispatch } from '../index'
 import { userSlice } from '../reducers/user-slice'
 import { getCookie } from '../../cookie/cookie'
-const API:string = 'https://norma.nomoreparties.space/api/auth'
+const API:string = 'https://norma.nomoreparties.space/api'
 
 export const fetchRegister = (email:string, password:string, name:string) => async(dispatch:AppDispatch) => {
     try {
         dispatch(userSlice.actions.fetching())
-        const response: any = await fetch(`${API}/register`, {
+        const response: any = await fetch(`${API}/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({email, password, name})
         })
-        console.log(response)
         if (!response.ok) {
             if(response.status === 403){
                 throw new Error('Такой пользователь уже существует.');
@@ -32,7 +31,7 @@ export const fetchRegister = (email:string, password:string, name:string) => asy
 export const fetchLogin = (email:string, password:string) => async(dispatch:AppDispatch) => {
     try {
         dispatch(userSlice.actions.fetching())
-        const response: any = await fetch(`${API}/login`, {
+        const response: any = await fetch(`${API}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -57,7 +56,7 @@ export const fetchLogin = (email:string, password:string) => async(dispatch:AppD
 export const getUserRequest = (accessToken: string) => async(dispatch:AppDispatch) => {
     try {
         dispatch(userSlice.actions.fetching())
-        const response = await fetch(`${API}/user`, {
+        const response = await fetch(`${API}/auth/user`, {
             method: 'GET',
             mode: 'cors',
             cache: 'no-cache',
@@ -82,7 +81,7 @@ export const getUserRequest = (accessToken: string) => async(dispatch:AppDispatc
 export const refreshToken = (token: string) => async(dispatch:AppDispatch) => {
     try {
         dispatch(userSlice.actions.fetching())
-        const response = await fetch(`${API}/token`, {
+        const response = await fetch(`${API}/auth/token`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -103,7 +102,7 @@ export const logoutRequest = () => async(dispatch:AppDispatch) => {
     const token = getCookie('token')
     try {
         dispatch(userSlice.actions.fetching())
-        const response = await fetch(`${API}/logout`, {
+        const response = await fetch(`${API}/auth/logout`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -131,11 +130,13 @@ export const forgotPassword = (email: string) => async(dispatch:AppDispatch) => 
             body: JSON.stringify({email})
         });
         if (!response.ok) {
-            throw new Error('Ошибка запроса');
+            if(response.status === 404){
+                throw new Error('Пользователь с таким email не существует.');
+            }
         }
         const res = await response.json();
-        console.log(res);
-        //dispatch(userSlice.actions.refreshToken(res))
+        dispatch(userSlice.actions.forgotPassword())
+        return res.success;
     } catch (error:any) {
         dispatch(userSlice.actions.fetchingError(`Внимание! ${error.message}`))
     }
@@ -155,8 +156,8 @@ export const resetPassword = (password:string, token: string) => async(dispatch:
             throw new Error('Ошибка запроса');
         }
         const res = await response.json();
-        console.log(res);
-        //dispatch(userSlice.actions.refreshToken(res))
+        dispatch(userSlice.actions.resetPassword())
+        return res.success;
     } catch (error:any) {
         dispatch(userSlice.actions.fetchingError(`Внимание! ${error.message}`))
     }

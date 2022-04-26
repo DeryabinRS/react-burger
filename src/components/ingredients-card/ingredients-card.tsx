@@ -7,6 +7,7 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import styles from './ingredients-card.module.css'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { currentIngredientAdd, currentIngredientRemove } from '../../services/store/reducers/ingredients-slice'
+import { NavLink } from 'react-router-dom'
 
 const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
     const [isActive, setIsActive] = useState(false)
@@ -40,13 +41,14 @@ const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
                 <IngredientDetails />
             </Modal>
             }
+            <NavLink to={`/ingredients/${props._id}`}>
             <div className={`${styles.card} pt-6 mr-4 ml-4`} ref={dragRef} style={{opacity}}>
                 <div className={styles.counter}>
                 {!!countIngredients && 
                     <Counter count={countIngredients} size="default" />
                 }
                 </div>
-                <div onClick={() => handleToggleModal(true)} className={styles.image}>
+                <div className={styles.image}>
                     <img src={props.image_large} alt={props.name} />
                 </div>
                 <div className={styles.price}>
@@ -56,6 +58,7 @@ const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
                     {props.name}
                 </div>
             </div>
+            </NavLink>
         </>
     )
 }
