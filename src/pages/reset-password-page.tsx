@@ -29,7 +29,8 @@ const ResetPasswordPage:FC = () => {
 		setCode(e.target.value);
 	};
 
-	const handleChangedPassword = async () => {
+	const handleChangedPassword = async (e:ChangeEvent<HTMLFormElement>) => {
+		e.preventDefault();
 		const success = await dispatch(resetPassword(password, code))
 		await setchangedPassword(success)
 	}

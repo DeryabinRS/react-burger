@@ -21,7 +21,8 @@ const ForgotPasswordPage:FC = () => {
 		setEmail(e.target.value);
 	};
 
-	const handleSendToken = async () => {
+	const handleSendToken = async (e: ChangeEvent<HTMLFormElement>) => {
+		e.preventDefault()
 		const success = await dispatch(forgotPassword(email))
 		if(success)	navigate('/reset-password', {state: success})
 	}
@@ -32,14 +33,14 @@ const ForgotPasswordPage:FC = () => {
 		<div className="container_center mt-25">
 			<div><h2>Восстановление пароля</h2></div>
 		{ isLoading ? (<div className="mt-20"><Loader/></div>) : (
-			<>
-			<div className="mt-6">
-				<Input onChange={onChangeEmail} value={email} name={"email"} type="email" placeholder="Укажите email"/>
-			</div>
-			<div className="mt-6">
-				<Button onClick={handleSendToken}>Восстановить</Button>
-			</div>
-			</>
+			<form onChange={handleSendToken}>
+				<div className="mt-6">
+					<Input onChange={onChangeEmail} value={email} name={"email"} type="email" placeholder="Укажите email"/>
+				</div>
+				<div className="mt-6">
+					<Button htmlType='submit'>Восстановить</Button>
+				</div>
+			</form>
 		)}
 		{isError && <Alert type="danger" delay={2500}>{message}</Alert>}
 			<div className="mt-20">Вспомнили пароль? <Link to="/login">Войти</Link></div>

@@ -21,11 +21,11 @@ const ProfilePageData:FC = () => {
 		setPassword(e.target.value);
 	};
     return (
-        <div>
+        <form>
             <div><Input icon={'EditIcon'} onChange={onChangeName} value={name} name={'name'} placeholder='Имя'/></div>
             <div className='mt-6'><Input icon={'EditIcon'} onChange={onChangeEmail} value={email} type={'email'} name={'email'} placeholder='Логин'/></div>
             <div className='mt-6'><Input icon={'EditIcon'} onChange={onChangePassword} value={password} type={'password'} name={'password'} placeholder='Пароль'/></div>
-        </div>
+        </form>
     )
 }
 

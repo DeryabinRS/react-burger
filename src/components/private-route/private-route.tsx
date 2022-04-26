@@ -2,7 +2,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/redux';
 
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
-  let location = useLocation();
+  const location = useLocation();
   const { user } = useAppSelector(state => state.userSlice);
 
   if (!!!user) {

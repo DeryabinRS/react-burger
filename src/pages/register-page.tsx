@@ -19,7 +19,8 @@ const RegisterPage:FC = () => {
   	const dispatch = useAppDispatch()
 	const {user, isLoading, isError, message} = useAppSelector(store => store.userSlice)
 
-	const handleRegister = () => {
+	const handleRegister = (e:ChangeEvent<HTMLFormElement>) => {
+		e.preventDefault()
 		if(name && email && password){
 			dispatch(fetchRegister(email, password, name))
 		}
@@ -43,7 +44,7 @@ const RegisterPage:FC = () => {
 		<div className="container_center mt-25">
 			<div><h2>Регистрация</h2></div>
 			{ isLoading ? (<div className="mt-20"><Loader/></div>) : (
-			<>
+			<form onSubmit={handleRegister}>
 				<div className="mt-6">
 					<Input onChange={onChangeName} value={name} name={"name"} placeholder={"Имя"}/>
 				</div>
@@ -58,9 +59,9 @@ const RegisterPage:FC = () => {
 					/>
 				</div>
 				<div className="mt-6">
-					<Button onClick={handleRegister}>Зарегистрироваться</Button>
+					<Button htmlType="submit">Зарегистрироваться</Button>
 				</div>
-			</>
+			</form>
 			)}
 			{isError && <Alert type="danger" delay={2500}>{message}</Alert>}
 			<div className="mt-20">Уже зарегистрирован? <Link to="/login">Войти</Link></div>
