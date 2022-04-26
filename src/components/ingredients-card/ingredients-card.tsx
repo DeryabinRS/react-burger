@@ -7,6 +7,7 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import styles from './ingredients-card.module.css'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { currentIngredientAdd, currentIngredientRemove } from '../../services/store/reducers/ingredients-slice'
+import { Link } from 'react-router-dom'
 
 const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
     const [isActive, setIsActive] = useState(false)
@@ -34,7 +35,7 @@ const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
     const countIngredients: number = useMemo(() => ingredients.filter((item:any) => props._id === item._id).length, [ingredients.length])
 
     return (
-        <>
+        <Link to={`/ingredients/${props._id}`} state={{modal: props._id}}>
             { isActive &&
             <Modal title="Детали ингредиента" isActive={isActive} handleToggleModal={handleToggleModal} >
                 <IngredientDetails />
@@ -56,7 +57,7 @@ const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
                     {props.name}
                 </div>
             </div>
-        </>
+        </Link>
     )
 }
 

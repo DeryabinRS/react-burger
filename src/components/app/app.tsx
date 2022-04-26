@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { 
     AppPage, 
     LoginPage, 
@@ -19,9 +19,12 @@ import { fetchIngredients } from '../../services/store/actions/action-ingredient
 import { getUserRequest, refreshToken } from '../../services/store/actions/action-user';
 import PrivateRoute from '../private-route/private-route';
 import { getCookie } from '../../services/cookie/cookie';
+import Modal from '../modal/modal';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 
 const App = () => {
-
+    const location:any = useLocation();
+    const navigate = useNavigate();
     const { accessToken } = useAppSelector(state => state.userSlice)
 
     const dispatch = useAppDispatch()
@@ -40,29 +43,33 @@ const App = () => {
         }
     }, [accessToken])
 
+    let modal = location?.state?.modal;
 
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<MainLayout/>}>
-                    <Route index element={<AppPage/>}/>
-                    <Route path="/login" element={<LoginPage/>}/>
-                    <Route path="/register" element={<RegisterPage/>}/>
-                    <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
-                    
-                    <Route path="/reset-password" element={<ResetPasswordPage/>}/>
 
-                    <Route path="/ingredients/:id" element={<IngredientsPage/>}/>
-                    <Route path="/profile" element={<PrivateRoute><ProfilePage/></PrivateRoute>}>
-                        <Route index element={<PrivateRoute><ProfilePageData/></PrivateRoute>}/>
-                        <Route path="/profile/orders" element={<PrivateRoute><ProfilePageOrders/></PrivateRoute>}/>
-                        <Route path="/profile/orders/:id" element={<PrivateRoute><ProfilePageOrdersId/></PrivateRoute>}/>
-                    </Route>
+        <Routes>
+            <Route path="/" element={<MainLayout/>}>
+                {modal && <Route path={`/ingredients/:${modal}`} element={
+                    <Modal title="Детали ингредиента" isActive={true} handleToggleModal={() => navigate(-1)} >
+                        <IngredientDetails />
+                    </Modal>} />}
+                <Route index element={<AppPage/>}/>
+                <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/register" element={<RegisterPage/>}/>
+                <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
+                
+                <Route path="/reset-password" element={<ResetPasswordPage/>}/>
 
-                    <Route path="/*" element={<NotFoundPage/>}/>
+                <Route path="/ingredients/:id" element={<IngredientsPage/>}/>
+                <Route path="/profile" element={<PrivateRoute><ProfilePage/></PrivateRoute>}>
+                    <Route index element={<PrivateRoute><ProfilePageData/></PrivateRoute>}/>
+                    <Route path="/profile/orders" element={<PrivateRoute><ProfilePageOrders/></PrivateRoute>}/>
+                    <Route path="/profile/orders/:id" element={<PrivateRoute><ProfilePageOrdersId/></PrivateRoute>}/>
                 </Route>
-            </Routes>
-        </Router>
+
+                <Route path="/*" element={<NotFoundPage/>}/>
+            </Route>
+        </Routes>
     )
 }
 
