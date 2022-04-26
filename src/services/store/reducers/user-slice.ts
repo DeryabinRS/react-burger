@@ -7,7 +7,7 @@ type initialStateType = {
     isLoading: boolean;
     isError: boolean;
     message: string;
-    accessToken: string | null
+    accessToken: string | null;
 }
 
 const initialState:initialStateType = {

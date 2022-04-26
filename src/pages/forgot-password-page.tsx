@@ -1,5 +1,5 @@
 import { FC, useState, ChangeEvent } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import {
 	Button,
   Input,
@@ -11,7 +11,8 @@ import { forgotPassword } from '../services/store/actions/action-user';
 
 const ForgotPasswordPage:FC = () => {
 	const [email, setEmail] = useState("");
-	const [sendemail, setSendEmail] = useState(false)
+
+	const navigate = useNavigate()
 
 	const dispatch = useAppDispatch()
 	const {user, isLoading, isError, message} = useAppSelector(store => store.userSlice)
@@ -22,12 +23,10 @@ const ForgotPasswordPage:FC = () => {
 
 	const handleSendToken = async () => {
 		const success = await dispatch(forgotPassword(email))
-		await setSendEmail(success)
+		if(success)	navigate('/reset-password', {state: success})
 	}
 
 	if(!!user) return <Navigate to={'/'} replace/>
-
-	if(sendemail) return <Navigate to={'/reset-password'} replace/>
 
 	return (
 		<div className="container_center mt-25">
