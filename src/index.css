@@ -65,6 +65,14 @@ a.active svg{
   color: #61dafb;
 }
 
+
+.page{ 
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
