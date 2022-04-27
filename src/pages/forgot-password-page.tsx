@@ -37,7 +37,7 @@ const ForgotPasswordPage:FC = () => {
 				<div className="mt-6">
 					<Input onChange={onChangeEmail} value={email} name={"email"} type="email" placeholder="Укажите email"/>
 				</div>
-				<div className="mt-6">
+				<div className="mt-6 text-center">
 					<Button htmlType='submit'>Восстановить</Button>
 				</div>
 			</form>
