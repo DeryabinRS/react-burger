@@ -49,18 +49,19 @@ const App = () => {
 
         <Routes>
             <Route path="/" element={<MainLayout/>}>
-                {modal && <Route path={`/ingredients/:${modal}`} element={
-                    <Modal title="Детали ингредиента" isActive={true} handleToggleModal={() => navigate(-1)} >
-                        <IngredientDetails />
-                    </Modal>} />}
+                
                 <Route index element={<AppPage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
                 <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
-                
                 <Route path="/reset-password" element={<ResetPasswordPage/>}/>
-
+                {modal ? <Route path={`/ingredients/:id`} element={
+                    <Modal title="Детали ингредиента" isActive={true} handleToggleModal={() => navigate(-1)} >
+                        <IngredientDetails />
+                    </Modal>} />
+                :    
                 <Route path="/ingredients/:id" element={<IngredientsPage/>}/>
+                }
                 <Route path="/profile" element={<PrivateRoute><ProfilePage/></PrivateRoute>}>
                     <Route index element={<PrivateRoute><ProfilePageData/></PrivateRoute>}/>
                     <Route path="/profile/orders" element={<PrivateRoute><ProfilePageOrders/></PrivateRoute>}/>

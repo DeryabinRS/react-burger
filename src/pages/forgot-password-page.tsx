@@ -33,7 +33,7 @@ const ForgotPasswordPage:FC = () => {
 		<div className="container_center mt-25">
 			<div><h2>Восстановление пароля</h2></div>
 		{ isLoading ? (<div className="mt-20"><Loader/></div>) : (
-			<form onChange={handleSendToken}>
+			<form onSubmit={handleSendToken}>
 				<div className="mt-6">
 					<Input onChange={onChangeEmail} value={email} name={"email"} type="email" placeholder="Укажите email"/>
 				</div>
