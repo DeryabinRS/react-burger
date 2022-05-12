@@ -1,9 +1,16 @@
 import { FC } from 'react'
+import { useParams } from 'react-router-dom'
 import { useAppSelector } from '../../hooks/redux'
+import { BurgerType } from '../../types/burger-types'
 import styles from './ingredient-details.module.css'
 
 const IngredientDetails: FC = () => {
-    const ingredient = useAppSelector(store => store.ingredientsSlice.currentIngredient)
+    const { id } = useParams()
+
+    const ingredients = useAppSelector(store => store.ingredientsSlice.ingredients)
+    
+    const ingredient:BurgerType | undefined = ingredients.find(item => item._id === id);
+
     return (
         <div className={styles.card}>
             <div className={styles.img}>

@@ -40,7 +40,7 @@ const BurgerIngredients: FC = (): JSX.Element => {
 
     return (
         <div className={styles.wrapper}>
-            <div><h2 className={`${styles.h2} mt-10 mb-5`}>Собери бургер</h2></div>
+            <div><h1 className={`${styles.h2} mt-10 mb-5`}>Собери бургер</h1></div>
             <div className={styles.flex}>
                 <Tab value="one" active={current === 'one'} onClick={setCurrent}>
                     Булки
