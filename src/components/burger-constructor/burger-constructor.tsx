@@ -17,7 +17,7 @@ import PrivateRoute from '../private-route/private-route';
 
 const BurgerConstructor: FC = () => {
 	const dispatch = useAppDispatch()
-	const [isActive, setIsActive] = useState(false)
+	const [isActive, setIsActive] = useState<boolean>(false)
 	
 	const { selectedIngredients, selectedBun, statePrice } = useAppSelector(state => state.constructorSlice)
 	const { numOrder } = useAppSelector(state => state.orderSlice)
@@ -44,7 +44,7 @@ const BurgerConstructor: FC = () => {
 		}
 	}
 
-	 const moveCard = useCallback((dragIndex, hoverIndex) => {
+	 const moveCard = useCallback((dragIndex: number, hoverIndex: number): void => {
 		const dragCard = ingredients[dragIndex];
 		const newCards = [...ingredients]
 

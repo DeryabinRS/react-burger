@@ -1,5 +1,5 @@
 import { FC, useRef } from "react";
-import { useDrag, useDrop } from 'react-dnd'
+import { DragSourceMonitor, DropTargetMonitor, useDrag, useDrop } from 'react-dnd'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-constructor.module.css'
 import { useAppDispatch } from "../../hooks/redux";
@@ -20,14 +20,14 @@ const BurgerIngredientCard: FC<BurgerIngredientCardType> = ({item, index, moveCa
 		item: () => {
 		  return { index }
 		},
-		collect: (monitor:any) => ({
+		collect: (monitor:DragSourceMonitor) => ({
 		  isDragging: monitor.isDragging(),
 		}),
 	})
 
 	const [{ handlerId }, drop] = useDrop({
 		accept: 'ingredientCard',
-		collect(monitor) {
+		collect(monitor: DropTargetMonitor) {
 		  return {
 			handlerId: monitor.getHandlerId(),
 		  }
@@ -57,7 +57,7 @@ const BurgerIngredientCard: FC<BurgerIngredientCardType> = ({item, index, moveCa
 		},
 	  })
 
-	const opacity = isDragging ? 0 : 1
+	const opacity: number = isDragging ? 0 : 1
 
   	drag(drop(ref))
 

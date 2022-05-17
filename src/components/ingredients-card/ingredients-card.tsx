@@ -1,5 +1,5 @@
 import { FC, useState, useCallback, useMemo } from 'react'
-import { useDrag } from 'react-dnd'
+import { DragSourceMonitor, useDrag } from 'react-dnd'
 import { BurgerType } from '../../types/burger-types'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal'
@@ -18,10 +18,10 @@ const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
         setIsActive(active)
     },[])
 
-    const [{ isDragging }, dragRef]:any = useDrag({
+    const [{ isDragging }, dragRef] = useDrag({
         type: 'ingredient',
         item: {...props},
-        collect: (monitor) => ({
+        collect: (monitor: DragSourceMonitor) => ({
             isDragging: monitor.isDragging(),
         }),
     });

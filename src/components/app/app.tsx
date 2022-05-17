@@ -43,7 +43,7 @@ const App = () => {
         }
     }, [accessToken])
 
-    let modal = location?.state?.modal;
+    let modal: string = location?.state?.modal;
 
     return (
 
