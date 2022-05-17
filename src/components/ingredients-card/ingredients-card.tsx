@@ -32,7 +32,7 @@ const IngredientsCard: FC<BurgerType> = (props): JSX.Element => {
 
     const ingredients = selectedBun ? [...selectedIngredients, selectedBun] : [...selectedIngredients]
 
-    const countIngredients: number = useMemo(() => ingredients.filter((item:any) => props._id === item._id).length, [ingredients.length])
+    const countIngredients: number = useMemo(() => ingredients.filter((item:BurgerType) => props._id === item._id).length, [ingredients.length])
 
     return (
         <Link to={`/ingredients/${props._id}`} state={{modal: props._id}}>
