@@ -21,15 +21,14 @@ import PrivateRoute from '../private-route/private-route';
 import { getCookie } from '../../services/cookie/cookie';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import { Location } from "history"
 
-type TLocation = {
-    from: Location;
-    modal?: Location;
+type TLocationState = {
+    modal?: string | undefined;
 }
 
 const App = () => {
-    const location:any = useLocation();
+    const location = useLocation();
+    console.log(location);
     const navigate = useNavigate();
     const { accessToken } = useAppSelector(state => state.userSlice)
 
@@ -49,7 +48,7 @@ const App = () => {
         }
     }, [accessToken])
 
-    let modal: string = location?.state?.modal;
+    const modal  = location.state as TLocationState;
 
     return (
 
