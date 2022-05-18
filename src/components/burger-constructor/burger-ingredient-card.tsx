@@ -4,17 +4,17 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import styles from './burger-constructor.module.css'
 import { useAppDispatch } from "../../hooks/redux";
 import { selectedIngredientDelete } from "../../services/store/reducers/constructor-slice";
+import { BurgerType } from "../../types/burger-types";
 
 interface BurgerIngredientCardType{
 	index: number; //unique key
-	item: any;
+	item: BurgerType;
 	moveCard: (dragIndex: number, hoverIndex: number) => void;
 }
 
 const BurgerIngredientCard: FC<BurgerIngredientCardType> = ({item, index, moveCard}, props) => {
 	const ref = useRef<HTMLInputElement>(null)
 	const dispatch = useAppDispatch()
-
 	const [{ isDragging }, drag] = useDrag({
 		type: 'ingredientCard',
 		item: () => {
@@ -70,7 +70,10 @@ const BurgerIngredientCard: FC<BurgerIngredientCardType> = ({item, index, moveCa
 				text={item.name}
 				price={item.price}
 				thumbnail={item.image_mobile}
-				handleClose={() => dispatch(selectedIngredientDelete(item.dragId))}
+				handleClose={() => {
+					item.dragId &&
+						dispatch(selectedIngredientDelete(item.dragId))
+				}}
 			/>
 		</div>
 	);

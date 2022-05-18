@@ -21,6 +21,12 @@ import PrivateRoute from '../private-route/private-route';
 import { getCookie } from '../../services/cookie/cookie';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import { Location } from "history"
+
+type TLocation = {
+    from: Location;
+    modal?: Location;
+}
 
 const App = () => {
     const location:any = useLocation();

@@ -6,7 +6,7 @@ const API:string = 'https://norma.nomoreparties.space/api'
 export const fetchRegister = (email:string, password:string, name:string) => async(dispatch:AppDispatch) => {
     try {
         dispatch(userSlice.actions.fetching())
-        const response: any = await fetch(`${API}/auth/register`, {
+        const response: Response = await fetch(`${API}/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ export const fetchRegister = (email:string, password:string, name:string) => asy
 export const fetchLogin = (email:string, password:string) => async(dispatch:AppDispatch) => {
     try {
         dispatch(userSlice.actions.fetching())
-        const response: any = await fetch(`${API}/auth/login`, {
+        const response: Response = await fetch(`${API}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ export const fetchLogin = (email:string, password:string) => async(dispatch:AppD
 export const getUserRequest = (accessToken: string) => async(dispatch:AppDispatch) => {
     try {
         dispatch(userSlice.actions.fetching())
-        const response = await fetch(`${API}/auth/user`, {
+        const response: Response = await fetch(`${API}/auth/user`, {
             method: 'GET',
             mode: 'cors',
             cache: 'no-cache',
@@ -81,7 +81,7 @@ export const getUserRequest = (accessToken: string) => async(dispatch:AppDispatc
 export const refreshToken = (token: string) => async(dispatch:AppDispatch) => {
     try {
         dispatch(userSlice.actions.fetching())
-        const response = await fetch(`${API}/auth/token`, {
+        const response: Response = await fetch(`${API}/auth/token`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -102,7 +102,7 @@ export const logoutRequest = () => async(dispatch:AppDispatch) => {
     const token = getCookie('token')
     try {
         dispatch(userSlice.actions.fetching())
-        const response = await fetch(`${API}/auth/logout`, {
+        const response: Response = await fetch(`${API}/auth/logout`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -122,7 +122,7 @@ export const logoutRequest = () => async(dispatch:AppDispatch) => {
 export const forgotPassword = (email: string) => async(dispatch:AppDispatch) => {
     try {
         dispatch(userSlice.actions.fetching())
-        const response = await fetch(`${API}/password-reset`, {
+        const response: Response = await fetch(`${API}/password-reset`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -145,7 +145,7 @@ export const forgotPassword = (email: string) => async(dispatch:AppDispatch) => 
 export const resetPassword = (password:string, token: string) => async(dispatch:AppDispatch) => {
     try {
         dispatch(userSlice.actions.fetching())
-        const response = await fetch(`${API}/password-reset/reset`, {
+        const response: Response = await fetch(`${API}/password-reset/reset`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

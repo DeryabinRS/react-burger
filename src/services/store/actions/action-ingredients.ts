@@ -7,7 +7,7 @@ export const fetchIngredients = () => async(dispatch:AppDispatch) => {
     const apiIngredients:string = `${API}/ingredients`
     try {
         dispatch(ingredientsSlice.actions.fetching())
-        const response: any = await fetch(apiIngredients)
+        const response: Response = await fetch(apiIngredients)
         if (!response.ok) {
             throw new Error('Ответ сети не был ok');
         }

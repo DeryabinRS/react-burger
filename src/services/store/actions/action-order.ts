@@ -7,7 +7,7 @@ export const fetchOdrer = (ingredients:any[]) => async(dispatch:AppDispatch) => 
     const apiOrder = `${API}/orders`
 		try {
             dispatch(orderSlice.actions.fetching())
-			const response = await fetch(apiOrder,{
+			const response: Response = await fetch(apiOrder,{
 				method: 'POST',
 				headers: {'Content-Type': 'application/json;charset=utf-8'},
 				body: JSON.stringify({ingredients})

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, SyntheticEvent } from 'react'
 
 import { Outlet } from 'react-router-dom'
 import CustomLink from '../../components/custom-link/custom-link';
@@ -9,8 +9,7 @@ const ProfilePage:FC = () => {
 
 	const dispatch = useAppDispatch()
 	
-
-	const handleLogout = (e:any) => {
+	const handleLogout = (e:SyntheticEvent):void => {
 		e.preventDefault()
 		dispatch(logoutRequest())
 	}
