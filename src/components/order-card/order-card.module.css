@@ -1,5 +1,40 @@
 .order_card{
     background-color: #1C1C21;
     border-radius: 40px;
-    min-width: 320px;
+}
+@media (min-width: 1200px){
+    .order_card{
+        min-width: 690px;
+    }
+}
+@media (max-width: 1200px){
+    .order_card{
+        min-width: 320px;
+    }
+}
+.header_card{
+    display: flex;
+    justify-content: space-between;
+}
+.ingredients div{
+    position: relative;
+    margin-right: -20px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: inline-block;
+    background: #1c1c21;
+    background: 
+    linear-gradient(#1c1c21 0 0) padding-box, /*this is your grey background*/
+    linear-gradient(to left, #4C4CFF 0%, #801AB2 100%) border-box;
+    border: 3px solid transparent;
+    display: inline-block;
+}
+.ingredients div img{ position: relative; width: 170%; top:5px; right: 20px;}
+.order_footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    font-size: 28px;  
+    flex-wrap: wrap;
 }

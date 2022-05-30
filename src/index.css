@@ -54,6 +54,11 @@ a.active svg{
   align-items: flex-start;
 }
 
+.scroll_wrapper{
+  max-height: 660px;
+  overflow-y: scroll;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
