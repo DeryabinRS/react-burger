@@ -1,33 +1,33 @@
 import { FC, useRef } from "react";
-import { useDrag, useDrop } from 'react-dnd'
+import { DragSourceMonitor, DropTargetMonitor, useDrag, useDrop } from 'react-dnd'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-constructor.module.css'
 import { useAppDispatch } from "../../hooks/redux";
 import { selectedIngredientDelete } from "../../services/store/reducers/constructor-slice";
+import { BurgerType } from "../../types/burger-types";
 
 interface BurgerIngredientCardType{
 	index: number; //unique key
-	item: any;
+	item: BurgerType;
 	moveCard: (dragIndex: number, hoverIndex: number) => void;
 }
 
 const BurgerIngredientCard: FC<BurgerIngredientCardType> = ({item, index, moveCard}, props) => {
 	const ref = useRef<HTMLInputElement>(null)
 	const dispatch = useAppDispatch()
-
 	const [{ isDragging }, drag] = useDrag({
 		type: 'ingredientCard',
 		item: () => {
 		  return { index }
 		},
-		collect: (monitor:any) => ({
+		collect: (monitor:DragSourceMonitor) => ({
 		  isDragging: monitor.isDragging(),
 		}),
 	})
 
 	const [{ handlerId }, drop] = useDrop({
 		accept: 'ingredientCard',
-		collect(monitor) {
+		collect(monitor: DropTargetMonitor) {
 		  return {
 			handlerId: monitor.getHandlerId(),
 		  }
@@ -57,7 +57,7 @@ const BurgerIngredientCard: FC<BurgerIngredientCardType> = ({item, index, moveCa
 		},
 	  })
 
-	const opacity = isDragging ? 0 : 1
+	const opacity: number = isDragging ? 0 : 1
 
   	drag(drop(ref))
 
@@ -70,7 +70,10 @@ const BurgerIngredientCard: FC<BurgerIngredientCardType> = ({item, index, moveCa
 				text={item.name}
 				price={item.price}
 				thumbnail={item.image_mobile}
-				handleClose={() => dispatch(selectedIngredientDelete(item.dragId))}
+				handleClose={() => {
+					item.dragId &&
+						dispatch(selectedIngredientDelete(item.dragId))
+				}}
 			/>
 		</div>
 	);

@@ -58,7 +58,7 @@ const RegisterPage:FC = () => {
 						name={"password"}
 					/>
 				</div>
-				<div className="mt-6">
+				<div className="mt-6 text-center">
 					<Button htmlType="submit">Зарегистрироваться</Button>
 				</div>
 			</form>

@@ -22,8 +22,12 @@ import { getCookie } from '../../services/cookie/cookie';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 
+type TLocationState = {
+    modal?: string | undefined;
+}
+
 const App = () => {
-    const location:any = useLocation();
+    const location = useLocation();
     const navigate = useNavigate();
     const { accessToken } = useAppSelector(state => state.userSlice)
 
@@ -43,25 +47,26 @@ const App = () => {
         }
     }, [accessToken])
 
-    let modal = location?.state?.modal;
+    const modal  = location.state as TLocationState;
 
     return (
 
         <Routes>
             <Route path="/" element={<MainLayout/>}>
                 
-                <Route index element={<AppPage/>}/>
+                <Route path="/" element={<AppPage/>}>
+                    {modal && <Route path={`/ingredients/:id`} element={
+                        <Modal title="Детали ингредиента" isActive={true} handleToggleModal={() => navigate(-1)} >
+                            <IngredientDetails />
+                        </Modal>} />
+                        
+                }
+                </Route>
+                <Route path="/ingredients/:id" element={<IngredientsPage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
                 <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
                 <Route path="/reset-password" element={<ResetPasswordPage/>}/>
-                {modal ? <Route path={`/ingredients/:id`} element={
-                    <Modal title="Детали ингредиента" isActive={true} handleToggleModal={() => navigate(-1)} >
-                        <IngredientDetails />
-                    </Modal>} />
-                :    
-                <Route path="/ingredients/:id" element={<IngredientsPage/>}/>
-                }
                 <Route path="/profile" element={<PrivateRoute><ProfilePage/></PrivateRoute>}>
                     <Route index element={<PrivateRoute><ProfilePageData/></PrivateRoute>}/>
                     <Route path="/profile/orders" element={<PrivateRoute><ProfilePageOrders/></PrivateRoute>}/>

@@ -1,6 +1,6 @@
 import { FC, useState, ChangeEvent } from 'react'
 import { useAppSelector } from '../../hooks/redux';
-import { Input } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 
 const ProfilePageData:FC = () => {
     const { user } = useAppSelector(state => state.userSlice)
@@ -25,6 +25,10 @@ const ProfilePageData:FC = () => {
             <div><Input icon={'EditIcon'} onChange={onChangeName} value={name} name={'name'} placeholder='Имя'/></div>
             <div className='mt-6'><Input icon={'EditIcon'} onChange={onChangeEmail} value={email} type={'email'} name={'email'} placeholder='Логин'/></div>
             <div className='mt-6'><Input icon={'EditIcon'} onChange={onChangePassword} value={password} type={'password'} name={'password'} placeholder='Пароль'/></div>
+			<div className='mt-6' style={{textAlign: "right"}}>
+				<Button type="secondary" size="medium">Отмена</Button>
+				<Button type="primary" size="medium">Сохранить</Button>
+			</div>
         </form>
     )
 }
