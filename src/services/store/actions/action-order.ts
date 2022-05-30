@@ -16,6 +16,7 @@ export const fetchOdrer = (ingredients:any[]) => async(dispatch:AppDispatch) => 
 				throw Error('Ошибка запроса')
 			}
 			const res = await response.json()
+			console.log(res)
 			dispatch(orderSlice.actions.setOrder(res.order.number))
 		} catch (error:any) {
 			dispatch(orderSlice.actions.fetchingError(`Возникла проблема с вашим fetch запросом: ${error.message}`))

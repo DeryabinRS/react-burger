@@ -58,11 +58,11 @@ const App = () => {
                     {modal && <Route path={`/ingredients/:id`} element={
                         <Modal title="Детали ингредиента" isActive={true} handleToggleModal={() => navigate(-1)} >
                             <IngredientDetails />
-                        </Modal>} />
-                        
-                }
+                        </Modal>} /> 
+                    }
                 </Route>
                 <Route path="/ingredients/:id" element={<IngredientsPage/>}/>
+
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
                 <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
@@ -70,8 +70,13 @@ const App = () => {
                 <Route path="/profile" element={<PrivateRoute><ProfilePage/></PrivateRoute>}>
                     <Route index element={<PrivateRoute><ProfilePageData/></PrivateRoute>}/>
                     <Route path="/profile/orders" element={<PrivateRoute><ProfilePageOrders/></PrivateRoute>}/>
-                    <Route path="/profile/orders/:id" element={<PrivateRoute><ProfilePageOrdersId/></PrivateRoute>}/>
+                    {modal && <Route path="/profile/orders/:id" element={
+                        <Modal title="" isActive={true} handleToggleModal={() => navigate(-1)} >
+                            <ProfilePageOrdersId/>
+                        </Modal>
+                    }/>}
                 </Route>
+                <Route path="/profile/orders/:id" element={<ProfilePageOrdersId/>}/>
 
                 <Route path="/*" element={<NotFoundPage/>}/>
             </Route>

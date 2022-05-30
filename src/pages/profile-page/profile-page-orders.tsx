@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 import OrderCard from "../../components/order-card/order-card";
 
 const orders = [
@@ -111,9 +112,11 @@ const orders = [
 
 const ProfilePageOrders:FC = () => {
   	return <div className="scroll scroll_wrapper pr-2">
-		  {orders.map(order => (
-			  <OrderCard key={order.id} num={order.number} name={order.name} ingredients={order.ingredients} date={new Date()} status={order.status} total={order.total}/>
-		  ))}
+		{orders.map(order => (
+			<Link to={`/profile/orders/${order.id}`} key={order.id} state={{modal: order.id}}>
+				<OrderCard num={order.number} name={order.name} ingredients={order.ingredients} date={new Date()} status={order.status} total={order.total}/>
+			</Link>
+		))}
 	</div>;
 };
 
