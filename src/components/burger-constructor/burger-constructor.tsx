@@ -20,6 +20,7 @@ const BurgerConstructor: FC = () => {
 	const [isActive, setIsActive] = useState<boolean>(false)
 	
 	const { selectedIngredients, selectedBun, statePrice } = useAppSelector(state => state.constructorSlice)
+	const accessToken = useAppSelector(state => state.userSlice.accessToken)
 	const { numOrder } = useAppSelector(state => state.orderSlice)
 
 	const ingredients = selectedIngredients.filter(item => item.type !== 'bun')
@@ -35,7 +36,7 @@ const BurgerConstructor: FC = () => {
 		if(active){
 			const ingredients = selectedIngredients.map(item => item._id)
 			const ingredientsWithBun = [...ingredients, selectedBun?._id]
-			dispatch(fetchOdrer(ingredientsWithBun))
+			dispatch(fetchOdrer(ingredientsWithBun, accessToken))
 			setIsActive(active)
 		}else{
 			dispatch(setOrder('0000'))

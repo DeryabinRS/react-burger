@@ -3,8 +3,8 @@ import { orderSlice } from '../reducers/order-slice'
 
 const API = 'https://norma.nomoreparties.space/api'
 
-export const fetchOdrer = (ingredients:any[]) => async(dispatch:AppDispatch) => {
-    const apiOrder = `${API}/orders`
+export const fetchOdrer = (ingredients:any[], accessToken:string | null) => async(dispatch:AppDispatch) => {
+    const apiOrder = `${API}/orders?token=${accessToken}`
 		try {
             dispatch(orderSlice.actions.fetching())
 			const response: Response = await fetch(apiOrder,{
