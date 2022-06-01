@@ -19,7 +19,7 @@ export const wsApi = createApi({
         try {
           await cacheDataLoaded;
           const listener = (event: MessageEvent) => {
-            const data = JSON.parse(event.data);
+            const data:IOrderResponse = JSON.parse(event.data);
             updateCachedData(() => data);
           };
 
