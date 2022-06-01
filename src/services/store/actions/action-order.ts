@@ -4,12 +4,15 @@ import { orderSlice } from '../reducers/order-slice'
 const API = 'https://norma.nomoreparties.space/api'
 
 export const fetchOdrer = (ingredients:any[], accessToken:string | null) => async(dispatch:AppDispatch) => {
-    const apiOrder = `${API}/orders?token=${accessToken}`
+    const apiOrder = `${API}/orders`
 		try {
             dispatch(orderSlice.actions.fetching())
 			const response: Response = await fetch(apiOrder,{
 				method: 'POST',
-				headers: {'Content-Type': 'application/json;charset=utf-8'},
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8',
+					Authorization: "Bearer " + accessToken
+				},
 				body: JSON.stringify({ingredients})
 			})
 			if(!response.ok){

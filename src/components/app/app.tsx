@@ -76,7 +76,7 @@ const App = () => {
                         </Modal>
                     }/>}
                 </Route>
-                <Route path="/profile/orders/:id" element={<ProfilePageOrdersId/>}/>
+                <Route path="/profile/orders/:id" element={<PrivateRoute><ProfilePageOrdersId/></PrivateRoute>}/>
 
                 <Route path="/*" element={<NotFoundPage/>}/>
             </Route>

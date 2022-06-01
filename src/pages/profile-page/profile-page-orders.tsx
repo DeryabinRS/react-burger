@@ -2,7 +2,9 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import OrderCard from "../../components/order-card/order-card";
 import { useAppSelector } from "../../hooks/redux";
-import { wsApi } from "../../services/store/reducers/ws-orders-slice";
+import { getCookie } from "../../services/cookie/cookie";
+import { useGetOrdersQuery }  from "../../services/store/reducers/ws-orders-slice";
+import { IOrder } from "../../types/orders-types";
 
 const orders = [
   {
@@ -54,15 +56,17 @@ const orders = [
 
 const ProfilePageOrders:FC = () => {
 	const accessToken = useAppSelector(store => store.userSlice.accessToken) || ' '
-	
-	const {data} = wsApi.useGetOrdersAllQuery(accessToken)
-
+	console.log(accessToken);
+	const { data, isLoading, isError } = useGetOrdersQuery(`wss://norma.nomoreparties.space/orders?token=${accessToken}`);
+	console.log(data);
+	const arrayOrdersReverse = data && [...data?.orders].reverse()
   	return <div className="scroll scroll_wrapper pr-2">
-		{orders.map(order => (
-			<Link to={`/profile/orders/${order.id}`} key={order.id} state={{modal: order.id}}>
-				<OrderCard num={order.number} name={order.name} ingredients={order.ingredients} date={new Date()} status={order.status} total={order.total}/>
+		{arrayOrdersReverse?.map(order => {
+			return (
+			<Link to={`/profile/orders/${order._id}`} key={order._id} state={{modal: order._id}}>
+				<OrderCard number={order.number} name={order.name} ingredients={order.ingredients} date={new Date()} status={order.status}/>
 			</Link>
-		))}
+		)})}
 	</div>;
 };
 
