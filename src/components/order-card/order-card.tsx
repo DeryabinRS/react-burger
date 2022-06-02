@@ -14,7 +14,7 @@ interface IOrderCard {
 const OrderCard:FC<IOrderCard> = ({number, name, ingredients, date, status}) => {
 	const currentDate:number = Number(new Date());
 	const storeIngredients = useAppSelector(store => store.ingredientsSlice.ingredients)
-	let days:number = Math.floor((currentDate - Number(date))/86400000); 
+	let days:number = Math.round((currentDate - Number(date))/86400000); 
 	
 	const textDateDays = days === 0 ? 'Сегодня' : `${days} дней назад`
 	let price = 0;
@@ -32,14 +32,18 @@ const OrderCard:FC<IOrderCard> = ({number, name, ingredients, date, status}) => 
 			</div>
 			<div className='mt-6'>{name}</div>
 			<div className={`mt-6 ${status === 'done' && styles.done}`}>{statusOrderText}</div>
-			<div className={`${styles.order_footer} mt-6`}>
-				<div className={`${styles.ingredients}`}>
+			<div className={`${styles.order_footer} mt-6 scroll`}>
+				<div className={`${styles.ingredient}`}>
 					{ingredients.map((item, i) => {
 						const ingredient = storeIngredients.find(i => i._id === item)
 						price += ingredient?.price || 0
 						if(ingredient) {
 							return (
-								<div key={i}><img src={ingredient.image_mobile} alt={ingredient.name}/></div>
+								<div key={i} className="ingredients">
+									<div className='image'>
+										<img src={ingredient.image_mobile} alt={ingredient.name}/></div>
+									</div>
+									
 							)
 						}
 					})}

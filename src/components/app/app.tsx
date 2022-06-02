@@ -47,7 +47,7 @@ const App = () => {
         }
     }, [accessToken])
 
-    const modal  = location.state as TLocationState;
+    const modal = location.state as TLocationState;
 
     return (
 
