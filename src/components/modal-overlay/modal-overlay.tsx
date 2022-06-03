@@ -2,7 +2,7 @@ import { FC } from 'react'
 import styles from './modal-overlay.module.css'
 
 interface ModalOverlayType {
-	onClose: any;
+	onClose: () => void;
 }
 
 const ModalOverlay: FC<ModalOverlayType> = ({ children, onClose }) => {
