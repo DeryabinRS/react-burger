@@ -1,20 +1,10 @@
 import { AppDispatch} from '../index'
 import { userSlice } from '../reducers/user-slice'
 import { getCookie } from '../../cookie/cookie'
-import { ThunkAction } from 'redux-thunk'
-import { AnyAction } from 'redux'
-import { RootState } from '../index'
 
 const API = process.env.REACT_APP_API
 
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  AnyAction
->
-
-export const fetchRegister: AppThunk | any = 
+export const fetchRegister = 
 (email:string, password:string, name:string) => async(dispatch:AppDispatch) => {
     try {
         dispatch(userSlice.actions.fetching())
