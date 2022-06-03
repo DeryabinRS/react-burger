@@ -3,6 +3,7 @@ import { orderSlice } from '../reducers/order-slice'
 import { ThunkAction } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { RootState } from '../index'
+import { BurgerType } from '../../../types/burger-types'
 
 const API = process.env.REACT_APP_API
 
@@ -13,7 +14,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   AnyAction
 >
 
-export const fetchOdrer: AppThunk | any = (ingredients:any[], accessToken:string | null) => async(dispatch:AppDispatch) => {
+export const fetchOdrer: AppThunk | any = (ingredients:BurgerType[], accessToken:string | null) => async(dispatch:AppDispatch) => {
     const apiOrder = `${API}/orders`
 		try {
             dispatch(orderSlice.actions.fetching())
