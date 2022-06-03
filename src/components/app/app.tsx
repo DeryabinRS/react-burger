@@ -56,13 +56,12 @@ const App = () => {
         <Routes>
             <Route path="/" element={<MainLayout/>}>
                 
-                <Route path="/" element={<AppPage/>}>
-                    {modal && <Route path={`/ingredients/:id`} element={
-                        <Modal title="Детали ингредиента" isActive={true} handleToggleModal={() => navigate(-1)} >
-                            <IngredientDetails />
-                        </Modal>} /> 
-                    }
-                </Route>
+                <Route path="/" element={<AppPage/>}/>
+                {modal && <Route path={`/ingredients/:id`} element={
+                    <Modal title="Детали ингредиента" isActive={true} handleToggleModal={() => navigate(-1)} >
+                        <IngredientDetails />
+                    </Modal>} /> 
+                }
                 <Route path="/ingredients/:id" element={<IngredientsPage/>}/>
 
                 <Route path="/login" element={<LoginPage/>}/>
