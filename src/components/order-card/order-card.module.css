@@ -1,10 +1,14 @@
 .order_card{
     background-color: #1C1C21;
     border-radius: 40px;
+    color: white;
+}
+.order_card:hover{
+    background-color: #1a1a1f;
 }
 @media (min-width: 1200px){
     .order_card{
-        min-width: 690px;
+        
     }
 }
 @media (max-width: 1200px){
@@ -31,4 +35,9 @@
 }
 .done{
     color:#00CCCC;
+}
+.total{
+    font-family: 'Iceland';
+    display: flex;
+    gap: 10px;
 }

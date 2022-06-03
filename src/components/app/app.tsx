@@ -12,6 +12,8 @@ import {
     ProfilePageData,
     ProfilePageOrders,
     ProfilePageOrdersId,
+    FeedPage,
+    FeedPageId,
 } from "../../pages";
 import MainLayout from "../../layouts/main-layout";
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -77,6 +79,14 @@ const App = () => {
                     }/>}
                 </Route>
                 <Route path="/profile/orders/:id" element={<PrivateRoute><ProfilePageOrdersId/></PrivateRoute>}/>
+
+                <Route path="/feed" element={<FeedPage/>}/>
+                {modal && <Route path="/feed/:id" element={
+                    <Modal title="" isActive={true} handleToggleModal={() => navigate(-1)} >
+                        <FeedPageId/>
+                    </Modal>
+                }/>}
+                <Route path="/feed/:id" element={<FeedPageId/>}/>
 
                 <Route path="/*" element={<NotFoundPage/>}/>
             </Route>

@@ -2,6 +2,19 @@
 @import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
 @import '~@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 
+:root{
+  --color_1: #00CCCC;
+}
+
+.text_color_1{
+  color: var(--color_1)
+}
+.font_iceland{
+  font-family: 'Iceland';
+  font-size: 22px;
+  line-height: 5px;
+}
+
 body {
   margin: 0;
   font-family: 'Jet Brains Mono';
@@ -59,7 +72,8 @@ a.active svg{
 
 .scroll_wrapper{
   max-height: 660px;
-  max-width: 790px;
+  max-width: 750px;
+  min-width: 420px;
   overflow-y: scroll;
 }
 
@@ -106,6 +120,26 @@ a.active svg{
   grid-template-rows: auto 1fr auto;
 }
 
+.page_feed{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 30px
+}
+.page_feed .orders_info{
+  display: flex;
+  gap: 30px;
+}
+.page_feed .orders_info div{
+  min-width: 200px;
+}
+
+.page_feed .total_count{
+  font-size: 105px;
+  line-height: 105px;
+  margin: 0;
+  text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+}
+
 .profile_menu{
   max-width: 320px;
 }
@@ -132,7 +166,12 @@ a.active svg{
   border: 3px solid transparent;
 }
 .ingredients .image img{ position: relative; width: 170%; top:5px; right: 20px;}
-
+.ingredients .count{
+  position: absolute;
+  top:18px;
+  left: 10px;
+  font-size: 22px;
+}
 
 .scroll{
 /*For Firefox*/

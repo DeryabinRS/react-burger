@@ -4,21 +4,18 @@ import Loader from "../../components/loader/loader";
 import { useAppSelector } from "../../hooks/redux";
 import { useGetOrdersQuery } from "../../services/store/reducers/ws-orders-slice";
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { IOrder } from "../../types/orders-types";
 
 type TLocationState = {
   modal?: string | undefined;
 };
 
-const ProfilePageOrdersId = () => {
+const FeedPageId = () => {
 	const { id } = useParams();
 	const location = useLocation();
 	const ls = location.state as TLocationState;
 
-	const accessToken =
-		useAppSelector((store) => store.userSlice.accessToken) || " ";
 	const { data, isLoading, isError } = useGetOrdersQuery(
-		`wss://norma.nomoreparties.space/orders?token=${accessToken}`
+		`wss://norma.nomoreparties.space/orders/all`
 	);
 	const storeIngredients = useAppSelector(
 		(store) => store.ingredientsSlice.ingredients
@@ -96,4 +93,4 @@ const ProfilePageOrdersId = () => {
 	);
 };
 
-export default ProfilePageOrdersId;
+export default FeedPageId;

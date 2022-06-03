@@ -8,7 +8,7 @@ const AppHeader = () => {
             <div className={styles.wrapper}>
                 <div className={styles.links}>
                     <CustomLink to="/" classes={`${styles.link} pl-5 pr-5 pt-4 pb-4 mr-2`}><BurgerIcon type="primary" /> <span className='ml-2'>Конструктор</span></CustomLink>
-                    <CustomLink to="/profile/orders" classes={`${styles.link} pl-5 pr-5 pt-4 pb-4 mr-2`}><ListIcon type="primary" /> <span className='ml-2'>Лента заказов</span></CustomLink>
+                    <CustomLink to="/feed" classes={`${styles.link} pl-5 pr-5 pt-4 pb-4 mr-2`}><ListIcon type="primary" /> <span className='ml-2'>Лента заказов</span></CustomLink>
                 </div>
                 <div className='mr-25'>
                     <Logo />

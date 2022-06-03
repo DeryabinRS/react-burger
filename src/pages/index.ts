@@ -9,7 +9,8 @@ import NotFoundPage from "./notfound-page/notfound-page";
 import ProfilePageData from './profile-page/profile-page-data';
 import ProfilePageOrders from './profile-page/profile-page-orders';
 import ProfilePageOrdersId from './profile-page/profile-page-orders-id';
-import FeedPage from "./feed-page";
+import FeedPage from "./feed/feed-page";
+import FeedPageId from "./feed/feed-page-id";
 
 export {
     AppPage, 
@@ -24,4 +25,5 @@ export {
     ProfilePageOrders,
     ProfilePageOrdersId,
     FeedPage,
+    FeedPageId,
 }
