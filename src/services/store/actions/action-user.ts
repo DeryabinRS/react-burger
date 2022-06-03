@@ -1,8 +1,6 @@
-import { AnyAction, Dispatch } from 'redux'
-import { AppDispatch, AppStore } from '../index'
+import { AppDispatch} from '../index'
 import { userSlice } from '../reducers/user-slice'
 import { getCookie } from '../../cookie/cookie'
-import { ThunkAction } from 'redux-thunk'
 
 const API = process.env.REACT_APP_API
 
