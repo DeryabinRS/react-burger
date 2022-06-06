@@ -1,7 +1,7 @@
 import { AppDispatch } from '../index'
 import { ingredientsSlice } from '../reducers/ingredients-slice'
 
-const API = 'https://norma.nomoreparties.space/api'
+const API = process.env.REACT_APP_API
 
 export const fetchIngredients = () => async(dispatch:AppDispatch) => {
     const apiIngredients:string = `${API}/ingredients`

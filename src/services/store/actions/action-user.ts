@@ -1,9 +1,11 @@
-import { AppDispatch } from '../index'
+import { AppDispatch} from '../index'
 import { userSlice } from '../reducers/user-slice'
 import { getCookie } from '../../cookie/cookie'
-const API:string = 'https://norma.nomoreparties.space/api'
 
-export const fetchRegister = (email:string, password:string, name:string) => async(dispatch:AppDispatch) => {
+const API = process.env.REACT_APP_API
+
+export const fetchRegister = 
+(email:string, password:string, name:string) => async(dispatch:AppDispatch) => {
     try {
         dispatch(userSlice.actions.fetching())
         const response: Response = await fetch(`${API}/auth/register`, {

@@ -1,50 +1,25 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
+import Loader from "../../components/loader/loader";
 import OrderCard from "../../components/order-card/order-card";
-
-const orders = [
-  {
-    id: 1,
-    number: "034535",
-    name: "Альфа-сахаридный экзо-плантаго флюоресцентный фалленианский бургер",
-    ingredients: [
-      "60d3b41abdacab0026a733c6",
-      "60d3b41abdacab0026a733d0",
-      "60d3b41abdacab0026a733d0",
-      "60d3b41abdacab0026a733d2",
-      "60d3b41abdacab0026a733d3",
-    ],
-  },
-  {
-    id: 2,
-    number: "034231",
-    name: "Альфа-сахаридный экзо-плантаго флюоресцентный фалленианский бургер",
-    ingredients: [
-      "60d3b41abdacab0026a733c6",
-      "60d3b41abdacab0026a733d0",
-      "60d3b41abdacab0026a733d0",
-      "60d3b41abdacab0026a733d2",
-      "60d3b41abdacab0026a733d3",
-    ],
-  },
-  {
-    id: 3,
-    number: "034432",
-    name: "Альфа-сахаридный экзо-плантаго флюоресцентный фалленианский бургер",
-    ingredients: [
-      "60d3b41abdacab0026a733c6",
-      "60d3b41abdacab0026a733d0",
-      "60d3b41abdacab0026a733d0",
-      "60d3b41abdacab0026a733d2",
-      "60d3b41abdacab0026a733d3",
-    ],
-  },
-];
+import { useAppSelector } from "../../hooks/redux";
+import { useGetOrdersQuery }  from "../../services/store/reducers/ws-orders-slice";
 
 const ProfilePageOrders:FC = () => {
-  	return <div className="scroll pr-2">
-		  {orders.map(order => (
-			  <OrderCard key={order.id} />
-		  ))}
+	const accessToken = useAppSelector(store => store.userSlice.accessToken) || ' '
+	const { data, isLoading, isError } = useGetOrdersQuery(`wss://norma.nomoreparties.space/orders?token=${accessToken}`);
+
+	const arrayOrdersReverse = data && [...data?.orders].reverse()
+
+	if(isLoading) return <Loader/>
+
+  	return <div className="scroll scroll_wrapper pr-2">
+		{arrayOrdersReverse?.map(order => {
+			return (
+			<Link to={`/profile/orders/${order._id}`} key={order._id} state={{modal: order._id}}>
+				<OrderCard number={order.number} name={order.name} ingredients={order.ingredients} date={new Date(order.updatedAt)} status={order.status}/>
+			</Link>
+		)})}
 	</div>;
 };
 

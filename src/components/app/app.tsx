@@ -12,6 +12,8 @@ import {
     ProfilePageData,
     ProfilePageOrders,
     ProfilePageOrdersId,
+    FeedPage,
+    FeedPageId,
 } from "../../pages";
 import MainLayout from "../../layouts/main-layout";
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -47,22 +49,21 @@ const App = () => {
         }
     }, [accessToken])
 
-    const modal  = location.state as TLocationState;
+    const modal = location.state as TLocationState;
 
     return (
 
         <Routes>
             <Route path="/" element={<MainLayout/>}>
                 
-                <Route path="/" element={<AppPage/>}>
-                    {modal && <Route path={`/ingredients/:id`} element={
-                        <Modal title="Детали ингредиента" isActive={true} handleToggleModal={() => navigate(-1)} >
-                            <IngredientDetails />
-                        </Modal>} />
-                        
+                <Route path="/" element={<AppPage/>}/>
+                {modal && <Route path={`/ingredients/:id`} element={
+                    <Modal title="Детали ингредиента" isActive={true} handleToggleModal={() => navigate(-1)} >
+                        <IngredientDetails />
+                    </Modal>} /> 
                 }
-                </Route>
                 <Route path="/ingredients/:id" element={<IngredientsPage/>}/>
+
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
                 <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
@@ -70,8 +71,21 @@ const App = () => {
                 <Route path="/profile" element={<PrivateRoute><ProfilePage/></PrivateRoute>}>
                     <Route index element={<PrivateRoute><ProfilePageData/></PrivateRoute>}/>
                     <Route path="/profile/orders" element={<PrivateRoute><ProfilePageOrders/></PrivateRoute>}/>
-                    <Route path="/profile/orders/:id" element={<PrivateRoute><ProfilePageOrdersId/></PrivateRoute>}/>
+                    {modal && <Route path="/profile/orders/:id" element={
+                        <Modal title="" isActive={true} handleToggleModal={() => navigate(-1)} >
+                            <ProfilePageOrdersId/>
+                        </Modal>
+                    }/>}
                 </Route>
+                <Route path="/profile/orders/:id" element={<PrivateRoute><ProfilePageOrdersId/></PrivateRoute>}/>
+
+                <Route path="/feed" element={<FeedPage/>}/>
+                {modal && <Route path="/feed/:id" element={
+                    <Modal title="" isActive={true} handleToggleModal={() => navigate(-1)} >
+                        <FeedPageId/>
+                    </Modal>
+                }/>}
+                <Route path="/feed/:id" element={<FeedPageId/>}/>
 
                 <Route path="/*" element={<NotFoundPage/>}/>
             </Route>
