@@ -34,12 +34,12 @@ const BurgerConstructor: FC = () => {
 
 	const handleToggleModal = (active:boolean) => {
 		if(active){
-			const ingredients = selectedIngredients.map(item => item._id)
+			const ingredients = selectedIngredients.map((item: any) => item._id)
 			const ingredientsWithBun = [...ingredients, selectedBun?._id]
 			dispatch(fetchOdrer(ingredientsWithBun, accessToken))
 			setIsActive(active)
 		}else{
-			dispatch(setOrder('0000'))
+			dispatch(setOrder('000000'))
 			dispatch(selectedIngredientsClear())
 			setIsActive(active)
 		}
