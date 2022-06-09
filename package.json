@@ -33,7 +33,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "deploy-script": "npm run build && scp -r ./build/* deryabinrs@51.250.93.69:/home/deryabinrs/stellar-frontend"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +55,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^4.0.0"
+    "fetch-mock": "^9.11.0",
+    "gh-pages": "^4.0.0",
+    "jest": "^28.1.1"
   }
 }

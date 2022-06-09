@@ -6,7 +6,7 @@ import modalSlice from './reducers/modal-ingredient-slice'
 import userSlice from './reducers/user-slice'
 import { wsApi } from "./reducers/ws-orders-slice";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
     ingredientsSlice,
     orderSlice,
     constructorSlice,
