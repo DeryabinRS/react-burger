@@ -7,7 +7,7 @@ type initialStateType = {
     statePrice: number;
 }
 
-const initialState:initialStateType = {
+export const initialState:initialStateType = {
     selectedIngredients: [],
     selectedBun: null,
     statePrice: 0,
@@ -31,6 +31,7 @@ export const constructorSlice = createSlice({
         },
         selectedIngredientDelete(state, action: PayloadAction<string>){
             state.selectedIngredients = state.selectedIngredients.filter(item => item.dragId !== action.payload)
+            state.statePrice = state.selectedIngredients.reduce((prev, item) => prev += item.price, 0)
         },
         selectedIngredientsClear(state){
             state.selectedIngredients = []
