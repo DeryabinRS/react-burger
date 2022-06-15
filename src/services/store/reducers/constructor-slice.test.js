@@ -6,8 +6,6 @@ import reducer, {
   selectedIngredientsClear,
 } from "./constructor-slice";
 
-import { setupStore } from '..'
-
 describe("Redux burger constructor reducer", () => {
   test("initialState", () => {
     expect(reducer(undefined, { type: "" })).toEqual(initialState);

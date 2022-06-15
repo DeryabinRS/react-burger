@@ -8,7 +8,7 @@ type initialStateType = {
     currentIngredient: BurgerType | null;
 }
 
-const initialState:initialStateType = {
+export const initialState:initialStateType = {
     ingredients: [],
     isLoading: false,
     error: '',
