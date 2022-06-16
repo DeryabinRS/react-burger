@@ -10,6 +10,17 @@ import App from "./components/app/app";
 
 const store = setupStore()
 
+declare global {
+	interface Window {
+	  Cypress?: Cypress.Cypress;
+	  store?: any
+	}
+  }
+
+if (window.Cypress) {
+	window.store = store;
+  }
+
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>

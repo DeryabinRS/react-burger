@@ -5,5 +5,7 @@ import reducer, {
   } from "./ingredients-slice";
   
 describe("Redux burger ingredients reducer", () => {
-
+    test('load ingredients', () => {
+        
+    })
 })
