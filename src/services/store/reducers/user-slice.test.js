@@ -20,14 +20,18 @@ import reducer,{
 //     accessToken: null,
 // }
 
-const accessToken = 'Token'
-
-const user = {
-    email:"deryabinrs@yandex.ru",
-    name:"Роман"
-}
 
 describe('User Slise', () => {
+    
+    const accessToken = 'Token'
+    
+    const user = { name: "userTest", email: "test@email.com" };
+    const userUpdate = { name: "userTestUpdate", email: "testUpdate@email.com" };
+
+    const action = {
+        user,
+        accessToken
+    }
 
     test("TEST - clearMessage userSlice", () => {
         expect(
@@ -43,15 +47,16 @@ describe('User Slise', () => {
       });
 
     it('TEST - login userSlice', () => {
+
         expect(
             reducer(
               initialState,
-              login({user, accessToken})
+              login(action)
             )
           ).toEqual({
             ...initialState,
-            user: user,
-            accessToken: accessToken,
+            user: action.user,
+            accessToken: action.accessToken,
             isLoading: false,
             isError: false
           })
@@ -65,8 +70,10 @@ describe('User Slise', () => {
             )
           ).toEqual({
             ...initialState,
+            user: null,
+            accessToken: null,
             isLoading: false,
-            error: 'Error'
+            isError: false
           })
     });
 
@@ -74,12 +81,14 @@ describe('User Slise', () => {
         expect(
             reducer(
               initialState,
-              register('Error')
+              register(action)
             )
           ).toEqual({
             ...initialState,
+            user: action.user,
+            accessToken: action.accessToken,
             isLoading: false,
-            error: 'Error'
+            isError: false,
           })
     });
 
@@ -87,12 +96,13 @@ describe('User Slise', () => {
         expect(
             reducer(
               initialState,
-              setUser('Error')
+              setUser(action)
             )
           ).toEqual({
             ...initialState,
+            user: action.user,
             isLoading: false,
-            error: 'Error'
+            isError: false,
           })
     });
 
@@ -100,11 +110,11 @@ describe('User Slise', () => {
         expect(
             reducer(
               initialState,
-              refreshToken('new Token')
+              refreshToken(accessToken)
             )
           ).toEqual({
             ...initialState,
-            accessToken: 'new Token',
+            accessToken: accessToken,
             isLoading: false,
             isError: false
           })
