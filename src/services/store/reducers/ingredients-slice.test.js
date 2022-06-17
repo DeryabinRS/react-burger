@@ -3,11 +3,9 @@ import reducer,{
     fetchingError,
     setIngredients,
     currentIngredientAdd,
-    currentIngredientRemove
-
+    currentIngredientRemove,
+    initialState
 } from './ingredients-slice';
-
-import { initialState, ingredientsSlice } from './ingredients-slice';
 
 // export const initialState = {
 //     ingredients: [],

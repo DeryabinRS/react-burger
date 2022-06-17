@@ -29,7 +29,6 @@ export const ingredientsSlice = createSlice({
         
         //INGREDIENTS API
         setIngredients(state, action: PayloadAction<BurgerType[]>){
-            console.log(action.payload)
             state.isLoading = false
             state.error = ''
             state.ingredients = action.payload

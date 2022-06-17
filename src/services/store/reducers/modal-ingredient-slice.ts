@@ -16,8 +16,8 @@ export const modalSlice = createSlice({
         currentIngredientAdd(state, action:PayloadAction<BurgerType>){
             state.currentIngredient = action.payload
         },
-        currentIngredientRemove(state, action:PayloadAction<null>){
-            state.currentIngredient = action.payload
+        currentIngredientRemove(state){
+            state.currentIngredient = null
         },
     }
 })
