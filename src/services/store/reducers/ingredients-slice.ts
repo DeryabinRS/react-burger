@@ -29,6 +29,7 @@ export const ingredientsSlice = createSlice({
         
         //INGREDIENTS API
         setIngredients(state, action: PayloadAction<BurgerType[]>){
+            console.log(action.payload)
             state.isLoading = false
             state.error = ''
             state.ingredients = action.payload
@@ -37,14 +38,17 @@ export const ingredientsSlice = createSlice({
             state.currentIngredient = action.payload
         },
         currentIngredientRemove(state, action:PayloadAction<null>){
-            state.currentIngredient = action.payload
+            state.currentIngredient = null
         },
     }
 })
 
 export const { 
+    setIngredients,
     currentIngredientAdd, 
     currentIngredientRemove, 
+    fetching,
+    fetchingError,
 } = ingredientsSlice.actions
 
 export default ingredientsSlice.reducer;
