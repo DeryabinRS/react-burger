@@ -4,7 +4,7 @@ import reducer,{
     initialState
 } from './modal-ingredient-slice';
 
-describe('Shop reducer', () => {
+describe('modalSlice', () => {
     const dataIngredients = {
         _id: '60d3b41abdacab0026a733c6',
         name: 'Краторная булка N-200i',

@@ -14,7 +14,7 @@ import reducer,{
 //     currentIngredient: null,
 // }
 
-describe('Shop reducer', () => {
+describe('ingredientSlice reducer', () => {
     const dataIngredients = {
         _id: '60d3b41abdacab0026a733c6',
         name: 'Краторная булка N-200i',

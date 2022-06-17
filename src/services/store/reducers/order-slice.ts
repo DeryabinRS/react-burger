@@ -6,7 +6,7 @@ type initialStateType = {
     error: string;
 }
 
-const initialState:initialStateType = {
+export const initialState:initialStateType = {
     numOrder: '0000',
     isLoading: false,
     error: '',
@@ -32,6 +32,8 @@ export const orderSlice = createSlice({
 
 export const { 
     setOrder,
+    fetching,
+    fetchingError,
 } = orderSlice.actions
 
 export default orderSlice.reducer;
