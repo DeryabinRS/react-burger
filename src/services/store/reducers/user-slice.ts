@@ -10,7 +10,7 @@ type initialStateType = {
     accessToken: string | null;
 }
 
-const initialState:initialStateType = {
+export const initialState:initialStateType = {
     user: null,
     isLoading: false,
     isError: false,
@@ -86,6 +86,15 @@ export const userSlice = createSlice({
 
 export const { 
     clearMessage,
+    login,
+    logout,
+    register,
+    setUser,
+    refreshToken,
+    forgotPassword,
+    resetPassword,
+    fetching,
+    fetchingError,
 } = userSlice.actions
 
 export default userSlice.reducer;
