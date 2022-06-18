@@ -23,7 +23,9 @@ import reducer,{
 
 describe('User Slise', () => {
     
-    const accessToken = 'Token'
+    const accessToken = 'Bearer Token'
+
+    const expectedToken = 'Token'
     
     const user = { name: "userTest", email: "test@email.com" };
     const userUpdate = { name: "userTestUpdate", email: "testUpdate@email.com" };
@@ -32,6 +34,7 @@ describe('User Slise', () => {
         user,
         accessToken
     }
+
 
     test("TEST - clearMessage userSlice", () => {
         expect(
@@ -56,7 +59,7 @@ describe('User Slise', () => {
           ).toEqual({
             ...initialState,
             user: action.user,
-            accessToken: action.accessToken,
+            accessToken: expectedToken,
             isLoading: false,
             isError: false
           })
@@ -86,7 +89,7 @@ describe('User Slise', () => {
           ).toEqual({
             ...initialState,
             user: action.user,
-            accessToken: action.accessToken,
+            accessToken: expectedToken,
             isLoading: false,
             isError: false,
           })
@@ -110,11 +113,11 @@ describe('User Slise', () => {
         expect(
             reducer(
               initialState,
-              refreshToken(accessToken)
+              refreshToken(action)
             )
           ).toEqual({
             ...initialState,
-            accessToken: accessToken,
+            accessToken: expectedToken,
             isLoading: false,
             isError: false
           })
