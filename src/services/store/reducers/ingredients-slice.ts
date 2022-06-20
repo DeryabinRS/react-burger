@@ -37,14 +37,17 @@ export const ingredientsSlice = createSlice({
             state.currentIngredient = action.payload
         },
         currentIngredientRemove(state, action:PayloadAction<null>){
-            state.currentIngredient = action.payload
+            state.currentIngredient = null
         },
     }
 })
 
 export const { 
+    setIngredients,
     currentIngredientAdd, 
     currentIngredientRemove, 
+    fetching,
+    fetchingError,
 } = ingredientsSlice.actions
 
 export default ingredientsSlice.reducer;

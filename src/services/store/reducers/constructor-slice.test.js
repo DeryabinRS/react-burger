@@ -7,9 +7,6 @@ import reducer, {
 } from "./constructor-slice";
 
 describe("Redux burger constructor reducer", () => {
-  test("initialState", () => {
-    expect(reducer(undefined, { type: "" })).toEqual(initialState);
-  });
 
   const ingredient_1 = {
     _id:"60d3b41abdacab0026a733cd",
