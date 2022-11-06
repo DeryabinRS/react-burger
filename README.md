@@ -7,8 +7,6 @@
 ## Приложение можно протестировать по следющим ссылкам:
 
 ### на [Github Pages](https://deryabinrs.github.io/react-burger/)
-### сайт [https://deryabinrs.nomoredomains.xyz/](https://deryabinrs.nomoredomains.xyz/)
-
 
 ## Данные для авторизации:
 ### E-mail:
